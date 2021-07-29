@@ -1,0 +1,14 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping ext="main.kts" type="Kotlin" />
+      <mapping ext="gradle.kts" type="Kotlin" />
+      <mapping ext="keystore" type="PLAIN_TEXT" />
+      <mapping pattern="UserAccountTimeMapper" type="XML" />
+      <mapping pattern="ProductMapper" type="XML" />
+      <mapping pattern="AccountMapper" type="XML" />
+      <mapping pattern="lompok" type="XML" />
+      <removed_mapping pattern="application.yml" approved="true" type="PLAIN_TEXT" />
+    </extensionMap>
+  </component>
+</application>
