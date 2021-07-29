@@ -102,6 +102,7 @@ public class FastJsonJsonpHttpMessageConverter extends FastJsonHttpMessageConver
     /**
      * 支持的mediaType类型
      */
+
     public List<MediaType> getSupportedMediaType() {
         ArrayList<MediaType> mediaTypes = new ArrayList<>();
         mediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
