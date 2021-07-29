@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>订单信息</title>
+		<link rel="stylesheet" type="text/css" href="layui-v2.6.8/layui/css/layui.css" />
+		<script src="layui-v2.6.8/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			h1{
+				text-align: center;
+				}
+			.layui-body{
+				left:10px
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header layui-bg-cyan">
+				<ul class="layui-nav layui-bg-cyan ">
+					<li class="layui-nav-item"><a th:href="@{/index}">景点信息</a></li>
+					<li class="layui-nav-item"><a th:href="@{/addInfo}">景点添加</a></li>
+					<li class="layui-nav-item layui-this"><a href="">订单信息</a></li>
+					<li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
+				</ul>
+				<ul class="layui-nav layui-bg-cyan layui-layout-right">
+					<li class="layui-nav-item layui-hide layui-show-md-inline-block">
+						<a th:href="@{/loginout}">
+							
+							登出
+						</a>
+						
+					</li>
+
+				</ul>
+			</div>
+			<div class="layui-body">
+				<h1>景点后台首页</h1>
+				<div class="demoTable">
+					搜索景点
+					<div class="layui-inline">
+						<input class="layui-input" name="id" id="searchReload" autocomplete="off" />
+					</div>
+					<button type="button" class="layui-btn" id="searchBtn">搜索</button>
+				</div>
+				<table id="dataView" lay-filter='topCheck' data-type="reload"></table>
+
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+			//导航依赖于element模块
+			layui.use(['element', 'table'], function() {
+				var element = layui.element;
+				var table = layui.table;
+				var $ = layui.jquery;
+				//加载
+				table.render({
+					title:'用户订单',
+					elem: "#dataView",
+					url: "/queryOrder", //数据接口
+					page: true,
+					loading: true,
+					method:"POST",
+					cols: [
+						[
+							//设置序列号列
+							{
+								field: 'aa',
+								title:'编号',
+								type: 'numbers'
+							},
+							
+							{
+								field: 'buyId',
+								title: '订单id',
+								sort: true,
+								width: 80,
+								hide: true
+							},
+							{
+								field: 'userId',
+								title: '用户id',
+								width: 80,
+								hide: true
+							},
+							{
+								field: 'nickName',
+								title: '用户昵称',
+								width: 80,
+								
+							},
+							{
+								field: 'scenicId',
+								title: '景区id',
+								width: 80,
+								hide:true
+							},
+							{
+								field: 'scenicName',
+								title: '景区名称',
+								width:360
+							},
+							{
+								field: 'audioId',
+								title: '音频id',
+								hide:true,
+								
+							},
+							{
+								field: 'audioName',
+								title: '音频类型',
+								width:280
+							},
+							{
+								field: 'audioMoney',
+								title: '音频价格',
+								width:260
+							},
+							{
+								field: 'buyTime',
+								title: '购买时间',
+								width:480
+							},
+		
+						]
+					],
+					toolbar: "#toolbar"
+				});
+
+
+	
+
+				/**
+				 * 给指定元素绑定事件
+				 */
+				$(document).on('click', '#searchBtn', function() {
+					//获取搜索文本框的值
+					var searchTxt = document.getElementById("searchReload");
+
+					//调用数据表格的重载方法
+					table.reload('dataView', {
+						url: "/searchOrder",
+						where: {
+							//设定需要传递的参数
+							nick_name: searchTxt.value,
+
+						},
+						dataType: "jsonp",
+						method: "post",
+						page:false
+					});
+				});
+
+			});
+			// });
+		</script>
+	</body>
+</html>
