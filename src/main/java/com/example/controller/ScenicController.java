@@ -228,6 +228,9 @@ public class ScenicController {
         jsonResult.setData(realpath);
         return jsonResult;
     }
+
+
+
     @RequestMapping(value="/uploadAudio",produces="application/json;charset=UTF-8")
     @ResponseBody
     public JsonResult uploadFile(@RequestParam("attachs") MultipartFile[] files,@Validated String name) {
@@ -266,6 +269,9 @@ public class ScenicController {
             //判断文件父目录是否存在
             if (!dest.getParentFile().exists()) {
                 dest.getParentFile().mkdir();
+                jsonResult.setCode(4);
+                jsonResult.setMsg("parent file not exist");
+                jsonResult.setData("父文件不存在");
             }
 
             String url;

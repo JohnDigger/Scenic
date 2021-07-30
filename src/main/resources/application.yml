@@ -37,4 +37,4 @@ mybatis-plus:
       # 删除后
       logic-delete-value: 0
 real:
-  path: C:/scenic/picture
+  path: D:\javaweb\Scenic\src\main\resources\static\upload
