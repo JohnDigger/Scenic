@@ -23,9 +23,6 @@ spring:
     serialization:
       write-dates-as-timestamps: false
 
-
-
-
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
