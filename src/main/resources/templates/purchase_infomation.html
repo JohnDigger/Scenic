@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head runat="server">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>购买信息</title>
+		<!-- 		<link href="layui/css/layui.css?v=2" rel="stylesheet" /> -->
+		<link rel="stylesheet" type="text/css" href="layui-v2.6.8/layui/css/layui.css" />
+		<!-- <link href="homepage.css" rel="stylesheet" /> -->
+		<link rel="stylesheet" type="text/css" href="css/homepage.css" />
+		<style type="text/css">
+			.layui-body {
+				left: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header layui-bg-cyan">
+				<ul class="layui-nav layui-bg-cyan ">
+					<li class="layui-nav-item"><a th:href="@{/index}">景点信息</a></li>
+					<li class="layui-nav-item"><a th:href="@{/addInfo}">景点添加</a></li>>
+					<li class="layui-nav-item "><a th:href="@{/pay}">订单信息</a></li>>
+					<li class="layui-nav-item layui-this"><a href="">购买信息</a></li>>
+				</ul>
+				<ul class="layui-nav layui-bg-cyan layui-layout-right">
+					<li class="layui-nav-item layui-hide layui-show-md-inline-block">
+						<a href="">
+
+							登出
+						</a>
+
+					</li>
+
+				</ul>
+			</div>
+			<div class="layui-body">
+
+
+				<div style="padding: 15px; background-color: #F2F2F2;">
+					<div class="layui-row layui-col-space15">
+						<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+							<div class="grid-demo">
+								<a href="javascript:;">
+									<div class="panel_icon" style="background-color: #1e9fff;">
+										<i class="layui-icon">&#xe770;</i>
+									</div>
+									<div class="panel_word" style="color: #1e9fff">
+										<span id="user_total"></span>
+										<cite>用户总量</cite>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+							<div class="grid-demo">
+								<a href="javascript:;">
+									<div class="panel_icon" style="background-color: #FFB800;">
+										<i class="layui-icon">&#xe618;</i>
+									</div>
+									<div class="panel_word" style="color: #FFB800;">
+										<span id="order_total"></span>
+										<cite>订单总量</cite>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+							<div class="grid-demo">
+								<a href="javascript:;">
+									<div class="panel_icon" style="background-color: #009688;">
+										<i class="layui-icon">&#xe7e0;</i>
+									</div>
+									<div class="panel_word" style="color: #009688;">
+										<span id="pay_total"></span>
+										<cite>购买用户</cite>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+							<div class="grid-demo">
+								<a href="javascript:;">
+									<div class="panel_icon" style="background-color: #5FB878;">
+										<i class="layui-icon">&#xe602;</i>
+									</div>
+									<div class="panel_word" style="color: #5FB878;">
+										<span id="senic_count"></span>
+										<cite>景点数量</cite>
+									</div>
+								</a>
+							</div>
+						</div>
+						<!-- <div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+					<div class="grid-demo">
+						<a href="javascript:;">
+							<div class="panel_icon" style="background-color: #393D49;">
+								<i class="layui-icon">&#xe609;</i>
+							</div>
+							<div class="panel_word" style="color: #393D49;">
+								<span>50</span>
+								<cite>视频课程</cite>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+					<div class="grid-demo">
+						<a href="javascript:;">
+							<div class="panel_icon" style="background-color: #393D49;">
+								<i class="layui-icon">&#xe615;</i>
+							</div>
+							<div class="panel_word" style="color: #393D49;">
+								<span>20</span>
+								<cite>视频课程订单</cite>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+					<div class="grid-demo">
+						<a href="javascript:;">
+							<div class="panel_icon" style="background-color: #FF5722;">
+								<i class="layui-icon">&#xe7b6;</i>
+							</div>
+							<div class="panel_word" style="color: #FF5722;">
+								<span>20</span>
+								<cite>商品</cite>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3"> -->
+						<!-- <div class="grid-demo">
+						<a href="javascript:;">
+							<div class="panel_icon" style="background-color: #FF5722;">
+								<i class="layui-icon">&#xe656;</i>
+							</div>
+							<div class="panel_word" style="color: #FF5722;">
+								<span>20</span>
+								<cite>商品订单</cite>
+							</div>
+						</a>
+					</div> -->
+					</div>
+				</div>
+
+				<div class="layui-row layui-col-space15">
+
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-header">景点语音销量</div>
+							<div class="layui-card-body">
+								<div style="width: 100%; height: 300px;" id="UserSum">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">
+								请选择年份
+								<div class="layui-inline">
+									<!-- 注意：这一层元素并不是必须的 -->
+									<input type="text" class="layui-input" id="year" placeholder="点击输入框选择年份">
+								</div>
+							</div>
+
+
+							<div class="layui-card-body">
+								<div style="width: 100%; height: 300px;" id="Shopping">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">日期范围</label>
+										<div class="layui-inline" id="date-range">
+											<div class="layui-input-inline">
+												<input type="text" id="startDate" class="layui-input" placeholder="开始日期">
+											</div>
+											<div class="layui-form-mid">-</div>
+											<div class="layui-input-inline">
+												<input type="text" id="endDate" class="layui-input" placeholder="结束日期">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="layui-card-body">
+
+								<div style="width: 100%; height: 300px;" id="Notice">
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <script src="layui/layui.js"></script> -->
+		<script src="layui-v2.6.8/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			layui.use('form', function() {
+				var form = layui.form;
+				form.render('select');
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					// layer.msg(JSON.stringify(data.field));
+					console.log(data.field)
+					// return false;
+				});
+			});
+			//注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+			layui.config({
+				version: 1,
+				base: 'js/'
+			}).use(['element', 'echarts', 'laydate'], function() {
+				var element = layui.element,
+					$ = layui.jquery,
+
+					echarts = layui.echarts,
+					laydate = layui.laydate;
+
+
+
+
+
+
+				// 基于准备好的dom，初始化echarts实例
+				var Shopping = echarts.init(document.getElementById('Shopping')),
+					Notice = echarts.init(document.getElementById('Notice')),
+					UserSum = echarts.init(document.getElementById('UserSum'));
+				// 指定图表的配置项和数据
+				var optionShopping = {
+						title: {
+							text: '年购买量'
+						},
+						tooltip: {},
+						legend: {
+							data: ['销量']
+						},
+						toolbox: {
+							feature: {
+								saveAsImage: {} //保存图片下载
+							}
+						},
+						xAxis: {
+							data: []
+						},
+						yAxis: {
+							type: 'value'
+						},
+						series: [{
+							name: '销量',
+							type: 'bar', //柱状
+							data: [],
+							itemStyle: {
+								normal: { //柱子颜色
+									color: '#4ad2ff'
+								}
+							},
+						}]
+					},
+					optionNotice = {
+						title: {
+							text: '时间段购买信息'
+						},
+						tooltip: {
+							trigger: 'axis' //悬浮显示对比
+						},
+						legend: { //顶部显示 与series中的数据类型的name一致
+							data: ['数据']
+						},
+						toolbox: {
+							feature: {
+								saveAsImage: {} //保存图片下载
+							}
+						},
+						xAxis: {
+							type: 'category',
+							boundaryGap: false, //从起点开始
+							data: []
+						},
+						yAxis: {
+							type: 'value'
+						},
+						series: [{
+							name: '数据',
+							type: 'line', //线性
+							data: [],
+						}]
+					},
+
+					optionUserSum = {
+						title: {
+							text: '近七天用户购买情况'
+						},
+						tooltip: {
+							trigger: 'axis' //悬浮显示对比
+						},
+						legend: { //顶部显示 与series中的数据类型的name一致
+							data: ['用户购买情况']
+						},
+						toolbox: {
+							feature: {
+								saveAsImage: {} //保存图片下载
+							}
+						},
+						xAxis: {
+							type: 'category',
+							boundaryGap: false, //起点开始
+							data: []
+						},
+						yAxis: {
+							type: 'value'
+						},
+						series: [{
+							name: '用户购买情况',
+							smooth: true, //曲线
+							type: 'line', //线性
+							areaStyle: {
+								color: ['rgba(70,220,230,.8)']
+							}, //区域颜色
+							lineStyle: { //线条颜色
+								color: '#00FF00'
+							},
+							itemStyle: {
+								normal: { //折点颜色
+									color: '#000'
+								}
+							},
+							data: [],
+						}]
+					};
+				// 使用刚指定的配置项和数据显示图表。
+				Shopping.setOption(optionShopping);
+				Notice.setOption(optionNotice);
+
+				UserSum.setOption(optionUserSum);
+				window.onresize = function() { //用于使echarts自适应高度和宽度
+					Shopping.resize();
+					Notice.resize();
+
+					UserSum.resize();
+				};
+				var names = [],
+					nums = [];
+				$.ajax({
+					type: "get",
+					async: true, //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+					url: "/getSevenCount",
+					data: {},
+					dataType: "json", //返回数据形式为json
+
+					success: function(result) {
+						//请求成功时执行该函数内容，result即为服务器返回的json对象
+						console.log(result)
+						if (result) {
+							for (var i = 0; i < result.length; i++) {
+								names.push(result[i].buyCount); //挨个取出类别并填入类别数组
+							}
+							for (var i = 0; i < result.length; i++) {
+								nums.push(result[i].buyTime); //挨个取出销量并填入销量数组
+							}
+
+							UserSum.setOption({
+								xAxis: {
+									data: nums
+								},
+								series: [{
+									// 根据名字对应到相应的系列
+									name: '销量',
+									data: names
+								}],
+							})
+						};
+
+					},
+					error: function(errorMsg) {
+						//请求失败时执行该函数
+						alert("图表请求数据失败!");
+
+					}
+				});
+				var x = [],
+					y = [];
+				laydate.render({
+					elem: '#year' //指定元素
+						,
+					value: 2021,
+					isInitValue: true,
+					type: "year",
+					done: function(value) {
+						console.log(value)
+						x = [], y = [];
+						$.ajax({
+							url: "/getYearCount",
+							data: {
+								'year': value
+							},
+							async: true,
+							type: "get",
+							dataType: "jsonp",
+							headers: {
+								'Content-Type': 'application/json;charset=utf-8'
+							},
+							success: function(result) {
+								console.log(result[0].data)
+								if (result) {
+									for (var i = 0; i < result[0].data.length; i++) {
+										y.push(result[0].data[i].buyCount); //挨个取出类别并填入类别数组
+									}
+									for (var i = 0; i < result[0].data.length; i++) {
+										x.push(result[0].data[i].buyTime); //挨个取出销量并填入销量数组
+									}
+									// console.log(x)
+									// console.log(y)
+
+									Shopping.setOption({
+										xAxis: {
+											data: x
+										},
+										series: [{
+											// 根据名字对应到相应的系列
+											name: '销量',
+											data: y
+										}],
+									})
+								};
+
+							},
+							error: function(data) {
+
+								console.log(data);
+								// window.location.reload();
+							},
+						});
+					}
+				});
+				var notice_x = [],
+					notice_y = [];
+				laydate.render({
+					elem: '#date-range' //开始时间和结束时间所在 input 框的父选择器
+						//设置开始日期、日期日期的 input 选择器
+						,
+					range: ['#startDate', '#endDate'] //数组格式为 layui 2.6.6 开始新增
+						,
+					done: function(value, date, endDate) {
+						notice_x = [], notice_y = []
+						var end_Date = endDate.year + "-" + endDate.month + "-" + endDate.date;
+						var start_Date = date.year + "-" + date.month + "-" + date.date;
+
+						$.ajax({
+							url: "/getScenicBuyCount",
+							data: {
+								'startTime': start_Date,
+								'endTime': end_Date
+							},
+							async: true,
+							type: "get",
+							dataType: "jsonp",
+							headers: {
+								'Content-Type': 'application/json;charset=utf-8'
+							},
+							success: function(result) {
+
+								if (result) {
+									for (var i = 0; i < result[0].length; i++) {
+										notice_y.push(result[0][i].buyCount); //挨个取出类别并填入类别数组
+									}
+									for (var i = 0; i < result[0].length; i++) {
+										notice_x.push(result[0][i].scenicName); //挨个取出销量并填入销量数组
+									}
+
+									Notice.setOption({
+										xAxis: {
+											data: notice_x
+										},
+										series: [{
+											// 根据名字对应到相应的系列
+											name: '销量',
+											data: notice_y
+										}],
+									})
+								};
+
+							},
+							error: function(data) {
+
+								console.log(data);
+								// window.location.reload();
+							},
+						});
+					}
+				});
+				$.ajax({
+					url: "/getOrderCount",
+
+					async: true,
+					type: "get",
+					success: function(result) {
+
+						document.getElementById("order_total").innerText = result;
+
+					},
+					error: function(data) {
+
+						alert("数据加载错误")
+						// window.location.reload();
+					},
+				});
+				$.ajax({
+					url: "/getUserCount",
+
+					async: true,
+					type: "get",
+					success: function(result) {
+
+						document.getElementById("pay_total").innerText = result;
+
+					},
+					error: function(data) {
+
+						alert("数据加载错误")
+						// window.location.reload();
+					},
+				});
+				$.ajax({
+					url: "/getAllUserCount",
+
+					async: true,
+					type: "get",
+					success: function(result) {
+
+						document.getElementById("user_total").innerText = result;
+
+					},
+					error: function(data) {
+
+						alert("数据加载错误")
+						// window.location.reload();
+					},
+				});
+				$.ajax({
+					url: "/getScenicCount",
+
+					async: true,
+					type: "get",
+					success: function(result) {
+
+						document.getElementById("senic_count").innerText = result;
+
+					},
+					error: function(data) {
+
+						alert("数据加载错误")
+						// window.location.reload();
+					},
+				});
+
+
+			});
+		</script>
+	</body>
+</html>

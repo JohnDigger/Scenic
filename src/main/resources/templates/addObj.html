@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>添加景区信息</title>
+		<link rel="stylesheet" type="text/css" href="layui-v2.6.8/layui/css/layui.css" />
+		<script src="layui-v2.6.8/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#layBody {
+				margin-top: 30px;
+			}
+
+			.layui-main {
+				margin: 0 auto;
+			}
+
+			.layui-textarea {
+				width: 400px;
+				height: 150px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header layui-bg-cyan">
+
+				<ul class="layui-nav layui-bg-cyan ">
+					<li class="layui-nav-item "><a th:href="@{/index}">景点信息</a></li>
+					<li class="layui-nav-item layui-this"><a href="">景点添加</a></li>
+					<li class="layui-nav-item "><a th:href="@{imgUpload}">图片上传</a></li>
+					<!-- 	<li class="layui-nav-item"><a href="">设备信息</a></li> -->
+				</ul>
+				<ul class="layui-nav layui-bg-cyan layui-layout-right">
+					<li class="layui-nav-item layui-hide layui-show-md-inline-block">
+						<a th:href="@{/loginout}">
+							登出
+						</a>
+						
+					</li>
+
+				</ul>
+
+			</div>
+			<div class="layui-body" id="layBody">
+				<h1 style="margin-bottom: 10px;">景点添加</h1>
+				<form action="" class="layui-form layui-form-pane" >
+					<!-- 下述是基本的行区块结构，它提供了响应式的支持。但如果你不大喜欢，你可以换成你的结构，但必须要在外层容器中定义class="layui-form"，form模块才能正常工作。 -->
+					<div class="layui-form-item ">
+						<label class="layui-form-label">景点名字</label>
+						<div class="layui-input-inline">
+							<!-- 文本框 -->
+							<input type="text" id="name" required lay-verify="required" placeholder="请输入景区名" autocomplete="off" class="layui-input">
+
+						</div>
+
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">简介</label>
+						<div class="layui-input-inline">
+							<!-- 文本框 -->
+							<input type="text" id="list" required lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">解说词</label>
+						<div class="layui-input-inline">
+							<!-- 文本框 -->
+							<textarea placeholder="请输入内容" class="layui-textarea" id="text"></textarea>
+
+						</div>
+					</div>
+				</form>
+				<input class="layui-btn" type="button" value="返回" onclick="backFunc()" />
+				<input class="layui-btn" type="submit" value="下一步" lay-filter="login_sub" lay-submit id="submitBtn" />
+			</div>
+
+		</div>
+		<script type="text/javascript">
+			 function backFunc(){
+				window.open("/index","_self")
+			};
+			layui.use(['upload', 'element', 'layer', 'form'], function() {
+						var $ = layui.jquery,
+							upload = layui.upload,
+							element = layui.element,
+							layer = layui.layer,
+							form = layui.form;
+
+						form.on('submit(login_sub)', function(data) {
+							var name = document.getElementById("name").value,
+								list = document.getElementById("list").value,
+								text = document.getElementById("text").value;
+								
+							$.ajax({
+								url: '/scenic/insertText',
+								data: {
+									'name': name,
+									'list': list,
+									'text': text,
+								},
+								async: false,
+								type: "post",
+								traditional: true,
+								dataType: "jsonp",
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+								},beforeSend:function(){
+									console.log(name);
+									if(name == "" || list == "" || text == ""){
+										layer.msg("必填信息项为空");
+										return false;
+									}
+								},
+								success:function(rec){
+									var code = rec[0].code;
+									var recive_data = rec[0].data.id
+									var setCookie = function(name,value,day){
+										//当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+										  var expires = day * 24 * 60 * 60 * 1000;
+										  var exp = new Date();
+										  exp.setTime(exp.getTime() + expires);
+										  document.cookie = name + "=" + value + ";expires=" + exp.toUTCString();
+									};
+									if(code==0){
+										var mg = layer.msg("提交成功",{time:5000,anim:6});
+										layer.close(mg);
+										layer.load(1,{anim:6});
+										setCookie("IndexId",recive_data,1)
+										window.open("/imgUpload","_self")
+									}else if(code == 5){
+										layer.msg("景区名重复");
+									};
+								},
+							});
+						});
+					});
+		</script>
+	</body>
+</html>

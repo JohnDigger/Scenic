@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TBuyMapper">
+
+    <select id="getScenicBuyCount" resultType="com.example.model.TBuy">
+        SELECT scenic_id,scenic_name,COUNT(buy_id) AS buy_count FROM t_buy AS b WHERE b.buy_time BETWEEN #{startTime} and #{endTime} GROUP BY scenic_id;
+    </select>
+
+    <select id="getSevenCount" resultType="com.example.model.TBuy">
+        select COUNT(*) as buy_count,DATE(buy_time) as buy_time
+        from t_buy
+        where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(buy_time)
+        GROUP BY DATE(buy_time)
+        ORDER BY
+        t_buy.buy_time ASC
+    </select>
+
+    <select id="getYearCount" resultType="com.example.model.TBuy">
+        select buy_time,COUNT(*) AS buy_count from (SELECT DATE_FORMAT(buy_time,'%Y-%m') AS buy_time FROM t_buy WHERE YEAR(buy_time) = #{year})a GROUP BY buy_time;
+    </select>
+
+    <select id="getOrderCount" resultType="java.lang.Integer">
+        select count(*) from t_buy
+    </select>
+
+    <select id="getUserCount" resultType="java.lang.Integer">
+        select count(DISTINCT user_id) from t_buy
+    </select>
+
+    <select id="getAllUserCount" resultType="java.lang.Integer">
+        select count(*) from t_user
+    </select>
+
+    <select id="getScenicCount" resultType="java.lang.Integer">
+        select count(*) from scenic
+    </select>
+
+    <select id="getAll" resultType="com.example.model.TBuy">
+    select * from t_buy limit #{page},#{limit}
+    </select>
+
+    <select id="OrderNum" resultType="java.lang.Integer">
+    select COUNT(*) from t_buy
+    </select>
+
+    <select id="searchAllByUserName" resultType="com.example.model.TBuy">
+    select * from t_buy where nick_name LIKE #{nick_name}
+    </select>
+</mapper>

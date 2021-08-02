@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<link rel="stylesheet" href="css/index_css.css">
+		<script src="/layer/jquery-2.1.1.min.js"></script>
+		<script src="/js/jq.js"></script>
+		<link rel="stylesheet" type="text/css" href="/layui-v2.6.8/layui/css/layui.css" />
+		<script src="/layui-v2.6.8/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="out">
+			<div id="top">
+				<img class="hand_left" src="/img/hand.png" />
+				<img class="display_hand_left" src="/img/left_hand.png" />
+				<img class="display_hand_right" src="/img/right_hand.png" />
+				<img class="handing_left" src="/img/left_handing.png" />
+				<img class="handing_right" src="/img/right_handing.png" />
+				<img class="tou" src="/img/tou.png" />
+				<img class="hand_right" src="/img/hand.png" />
+			</div>
+			<div id="bottom">
+				<p>Copyright &copy; 2020-2021 Zero2One团队 版权所有</p>
+			</div>
+			<div id="init">
+				<form onsubmit="return check()" id="form" class="layui-form">
+					<div class="input_text">
+						<div class="userName">
+							<img src="/img/username.png" />
+							<input type="text" id="userName" name="username" />
+						</div>
+						<div class="password">
+							<img src="/img/password.png" />
+							<input type="password" id="password" name="password" />
+						</div>
+						<div class="txt" id="result">
+
+						</div>
+
+					</div>
+
+				</form>
+				<div class="login">
+					<p class="blog_txt">黄龙景区后台管理系统</p>
+					<input class="btn" type="submit" value="登录" lay-filter="login_sub" lay-submit />
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			// function check() {
+			// 	var form = document.getElementById('form'); // 获得form表单的id
+			// 	var user = form.account.value.replace(/(^\s*)|(\s*$)/g, ""); // 过滤user左右的空格
+			// 	var pwd = form.password.value.replace(/(^\s*)|(\s*$)/g, ""); // 过滤pwd左右的空格
+			// 	if (user.length == 0 && pwd.length == 0) {
+			// 		document.getElementById("result").innerHTML = "账号和密码都不能为空";
+			// 		return false; // 返回假
+			// 	} else if (user.length == 0) { // 获得id=form的name=user的value的长度
+			// 		document.getElementById("result").innerHTML = "账号不能为空";
+			// 		return false; // 返回假
+			// 	} else if (pwd.length == 0) { // 获得id=form的name=pwd的value的长度
+			// 		document.getElementById("result").innerHTML = "密码不能为空";
+			// 		return false; // 返回假
+			// 	}
+			// }
+			layui.use(['form', 'jquery'], function() {
+				var form = layui.form;
+				var $ = layui.jquery;
+				form.on('submit(login_sub)', function(data) {
+					var name = document.getElementById("userName").value;
+					var password = document.getElementById("password").value;
+
+					$.ajax({
+						url: '/userlogin',
+						data: {
+							'username': name,
+							'password': password,
+						},
+						async: false,
+						traditional: true,
+						type: "post",
+						dataType: "jsonp",
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						},
+						beforeSend: function() {
+							var form = document.getElementById('form'); // 获得form表单的id
+							var user = form.userName.value.replace(/(^\s*)|(\s*$)/g, ""); // 过滤user左右的空格
+							var pwd = form.password.value.replace(/(^\s*)|(\s*$)/g, ""); // 过滤pwd左右的空格
+							if (user.length == 0 && pwd.length == 0) {
+								document.getElementById("result").innerHTML = "账号和密码都不能为空";
+								return false; // 返回假
+							} else if (user.length == 0) { // 获得id=form的name=user的value的长度
+								document.getElementById("result").innerHTML = "账号不能为空";
+								return false; // 返回假
+							} else if (pwd.length == 0) { // 获得id=form的name=pwd的value的长度
+								document.getElementById("result").innerHTML = "密码不能为空";
+								return false; // 返回假
+							}else{
+								var mg = layer.msg("登陆中",{icon: 6,time:1000,anim:6});
+								layer.close(mg);
+
+							}
+							
+						},
+						xhrFields: {withCredentials: true},
+						success: function(code) {
+							var status_code = code[0].code;
+							// var messege = code[0].msg;
+							// var login_data = code[0].data;
+							console.log(status_code)
+							if (status_code === 0) {
+								window.open("/index","_self");
+
+							}else if(status_code == 1){
+								layer.msg("密码错误",{icon:5,time:5000});
+							}else if(status_code == 2){
+								layer.msg("用户不存在",{icon:5,time:5000});
+							}
+						},error:function(obj){
+							console.log("出错");
+							layer.msg("出错了",{icon:5,time:5000});
+						}
+
+
+
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
