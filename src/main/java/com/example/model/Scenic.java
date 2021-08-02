@@ -2,11 +2,13 @@ package com.example.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -26,7 +28,8 @@ public class Scenic extends Model {
     private static final long serialVersionUID = 1L;
     @Id
     private int id;
-
+    @NotNull(message = "不能为空")
+    @NotEmpty(message = "此字段不可以为空")
     private String name;
 
     private String list;

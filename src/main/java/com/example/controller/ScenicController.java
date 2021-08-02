@@ -7,6 +7,8 @@ import com.example.service.IScenicService;
 import com.example.model.JsonResult;
 import com.example.util.PicUploadUtil;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -39,9 +42,9 @@ import java.util.Map;
 @ResponseBody
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class ScenicController {
+    //配置日志输出
+    protected static final Logger logger = LoggerFactory.getLogger(ScenicController.class);
 
-    @Value("${real.path}")
-    String realpath;
 
     @Autowired
     private IScenicService scenicService;
@@ -164,7 +167,7 @@ public class ScenicController {
 
     @RequestMapping(value = "addInfo",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult add(@Validated String name, @RequestParam("attachs") MultipartFile[] attachs, HttpServletResponse response)  throws IOException{
+    public JsonResult add(@Validated @RequestParam(value = "name",required = true) String name, @RequestParam("attachs") MultipartFile[] attachs, HttpServletResponse response, HttpServletRequest req)  throws IOException{
         JsonResult jsonResult = new JsonResult();
 //        Scenic scenic = new Scenic();
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -180,8 +183,8 @@ public class ScenicController {
 //            return jsonResult;
 //        }
 
-//        String realpath = req.getSession().getServletContext().getRealPath("/resources/upload");
-
+        //获取当前工程文件路径
+       String realpath = this.getClass().getResource("/static/upload/").getPath();
         //       logger.info("product-------add-----------realPath:" + JSON.toJSON(realpath));
         for (MultipartFile attach : attachs) {
             if (attach.isEmpty()) {
@@ -207,9 +210,9 @@ public class ScenicController {
 //            logger.info("product添加getOriginalFilename:" + JSON.toJSON(attach.getOriginalFilename()));
 //            logger.info("product添加path:" + JSON.toJSON(path));
 //            product.setImg(picName);
-            scenic.setPicturePath("http://localhost:80/pictrue/"+picName);
+            scenic.setPicturePath("http://localhost:8080/pictrue/"+picName);
 //            productService.addImg(product);
-            scenicMapper.updateByName(name,"http://localhost:80/pictrue"+picName);
+            scenicMapper.updateByName(name,"http://localhost:8080/pictrue/"+picName);
             System.out.println(name);
             try {
 
@@ -233,7 +236,7 @@ public class ScenicController {
 
     @RequestMapping(value="/uploadAudio",produces="application/json;charset=UTF-8")
     @ResponseBody
-    public JsonResult uploadFile(@RequestParam("attachs") MultipartFile[] files,@Validated String name) {
+    public JsonResult uploadFile(@RequestParam("attachs") MultipartFile[] files,@Validated @RequestParam(value = "name",required = true) String name) {
         JsonResult jsonResult = new JsonResult();
         System.out.print("上传文件==="+"\n");
         for (MultipartFile file : files){
@@ -248,9 +251,10 @@ public class ScenicController {
             String fileName = Objects.requireNonNull(file.getOriginalFilename()).replace(" ","");
             fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
             System.out.print("（加个时间戳，尽量避免文件名称重复）保存的文件名为: "+fileName+"\n");
-
+            //获取当前工程文件路径
+            String realpath = this.getClass().getResource("/static/upload/").getPath();
             //加个时间戳，尽量避免文件名称重复
-            String path = "ScenicController" +fileName;
+            String path = realpath + fileName;
             //String path = "E:/fileUpload/" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
             //文件绝对路径
             System.out.print("保存文件绝对路径"+path+"\n");
@@ -279,7 +283,7 @@ public class ScenicController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:80/audio"+fileName;
+                url="http://localhost:8080/audio/"+fileName;
                 int final_res = scenicMapper.updateAudioPathByName(name,url);
                 jsonResult.setCode(0);
                 jsonResult.setMsg("success");
