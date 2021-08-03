@@ -49,7 +49,7 @@ public class ScenicController {
     @Autowired
     private IScenicService scenicService;
 
-    @Autowired
+    @Autowired(required = false)
     private ScenicMapper scenicMapper;
 
     //微信小程序
@@ -234,7 +234,7 @@ public class ScenicController {
 
 
 
-    @RequestMapping(value="/uploadAudio",produces="application/json;charset=UTF-8")
+    @RequestMapping(value="/uploadVideo",produces="application/json;charset=UTF-8")
     @ResponseBody
     public JsonResult uploadFile(@RequestParam("attachs") MultipartFile[] files,@Validated @RequestParam(value = "name",required = true) String name) {
         JsonResult jsonResult = new JsonResult();
@@ -284,10 +284,7 @@ public class ScenicController {
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
                 url="http://localhost:8080/audio/"+fileName;
-                int final_res = scenicMapper.updateAudioPathByName(name,url);
-                jsonResult.setCode(0);
-                jsonResult.setMsg("success");
-                jsonResult.setData(final_res);
+                scenicService.updateVideo(name,url);
 
 
             } catch (IOException e) {
