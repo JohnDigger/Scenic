@@ -247,6 +247,8 @@ public class ScenicController {
                 jsonResult.setData("文件为空");
                 return jsonResult;
             }
+
+
             // 获取文件名
             String fileName = Objects.requireNonNull(file.getOriginalFilename()).replace(" ","");
             fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
