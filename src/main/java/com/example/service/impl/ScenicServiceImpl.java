@@ -72,6 +72,22 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
         return 0;
     }
 
+    @Override
+    public JsonResult updateVideo(String name, String video_path) {
+        JsonResult jsonResult = new JsonResult();
+        int updateStatus = scenicMapper.updateVideo_pathInt(name,video_path);
+        if (updateStatus == 0){
+            jsonResult.setCode(0);
+            jsonResult.setMsg("上传失败");
+            jsonResult.setData("上传失败，请检查是否不存在此景区或者景区名为空");
+        }else if (updateStatus == 1){
+            jsonResult.setCode(1);
+            jsonResult.setMsg("sucess");
+            jsonResult.setData("上传成功");
+        }
+        return jsonResult;
+    }
+
 
     @Override
     public JsonResult queryMsg() {

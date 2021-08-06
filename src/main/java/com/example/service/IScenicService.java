@@ -41,4 +41,6 @@ public interface IScenicService extends IService<Scenic> {
     List<TBuy> getUserBuyMsg(String username);
 
     int saveUserMsg(String nickName, String openId);
+
+    JsonResult updateVideo(String name,String video_path);
 }

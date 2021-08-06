@@ -41,6 +41,9 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     int updateAudioPathByName(String name,String audio_path);
 
+    int updateVideo_pathInt(String name,String video_path);
+
+
     Scenic findByNameScenic(String name);
 
     int InsertScenic(Scenic scenic);
