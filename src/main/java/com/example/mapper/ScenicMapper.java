@@ -55,4 +55,6 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
     TUser getUserByOpenId(String openId);
 
     void saveUserMsg(String nickName, String openId);
+
+    List<Scenic> getScenicByType(String typeId);
 }

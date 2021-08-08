@@ -88,6 +88,11 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
         return jsonResult;
     }
 
+    @Override
+    public List<Scenic> getScenicByType(String typeId) {
+        return scenicMapper.getScenicByType(typeId);
+    }
+
 
     @Override
     public JsonResult queryMsg() {

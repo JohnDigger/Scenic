@@ -41,6 +41,8 @@ public class Scenic extends Model {
     private String videoPath;
 
 
+    private String typeId;
+
     @TableField(value = "audio_id", exist = false)
     private int audioid;
     @TableField(value = "scenic_id", exist = false)

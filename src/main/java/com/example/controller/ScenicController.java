@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import ch.qos.logback.core.util.FileUtil;
 import com.example.mapper.ScenicMapper;
 import com.example.model.*;
 import com.example.service.IScenicService;
@@ -12,11 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +87,11 @@ public class ScenicController {
     @RequestMapping("/getUserBuyMsg")
     public List<TBuy> getUserBuyMsg(String openId) {
         return scenicService.getUserBuyMsg(openId);
+    }
+
+    @RequestMapping("/getScenicByType")
+    public List<Scenic> getScenicByType(String typeId) {
+        return scenicService.getScenicByType(typeId);
     }
 
 

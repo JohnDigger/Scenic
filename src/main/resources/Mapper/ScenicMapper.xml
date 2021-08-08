@@ -30,6 +30,9 @@
     <select id="getUserByOpenId" resultType="com.example.model.TUser">
         select * from t_user u where u.open_id = #{openId}
     </select>
+    <select id="getScenicByType" resultType="com.example.model.Scenic">
+         select * from scenic where type_id=#{typrId}
+    </select>
 
 
     <insert id="InsertScenic"  parameterType="com.example.model.Scenic" useGeneratedKeys="true" keyProperty="id"  >
