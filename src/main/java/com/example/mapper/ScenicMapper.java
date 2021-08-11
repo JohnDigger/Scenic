@@ -43,8 +43,7 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     int updateVideo_pathInt(String name,String video_path);
 
-
-    Scenic findByNameScenic(String name);
+    int findByNameScenic(String name);
 
     int InsertScenic(Scenic scenic);
 
@@ -55,4 +54,6 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
     TUser getUserByOpenId(String openId);
 
     void saveUserMsg(String nickName, String openId);
+
+    List<Scenic> getScenicByType(String typeId);
 }
