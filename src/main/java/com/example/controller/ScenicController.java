@@ -94,6 +94,11 @@ public class ScenicController {
         return scenicService.getScenicByType(typeId);
     }
 
+    @RequestMapping("/search")
+    public List<Scenic> searchScenic(String Sname){
+        return scenicService.searchScenic(Sname);
+    }
+
 
 
 

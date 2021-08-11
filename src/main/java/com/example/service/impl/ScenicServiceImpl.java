@@ -73,6 +73,24 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     }
 
     @Override
+    public List<Scenic> searchScenic(String Sname) {
+        int id = scenicMapper.findByNameScenic(Sname);
+        return scenicMapper.getByIdPlus(id);
+    }
+
+    @Override
+    public List<Scenic> getScenicByType(String typeId) {
+        return scenicMapper.getScenicByType(typeId);
+    }
+
+
+
+
+
+
+
+
+    @Override
     public JsonResult updateVideo(String name, String video_path) {
         JsonResult jsonResult = new JsonResult();
         int updateStatus = scenicMapper.updateVideo_pathInt(name,video_path);
@@ -88,10 +106,6 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
         return jsonResult;
     }
 
-    @Override
-    public List<Scenic> getScenicByType(String typeId) {
-        return scenicMapper.getScenicByType(typeId);
-    }
 
 
     @Override
