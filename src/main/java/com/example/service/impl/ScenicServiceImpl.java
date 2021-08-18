@@ -26,8 +26,8 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
 
     @Override
-    public Map<Integer, Object> getList() {
-        List<Scenic> lis = scenicMapper.findAll();
+    public Map<Integer, Object> getList(int start, int num) {
+        List<Scenic> lis = scenicMapper.getList(start-1,num);
         Map<Integer,Object> mp = new HashMap<>();
 
         for (Scenic i:lis){
@@ -74,8 +74,7 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
     @Override
     public List<Scenic> searchScenic(String Sname) {
-        int id = scenicMapper.findByNameScenic(Sname);
-        return scenicMapper.getByIdPlus(id);
+        return scenicMapper.searchScenic(Sname);
     }
 
     @Override

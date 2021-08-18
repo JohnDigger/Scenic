@@ -25,7 +25,7 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     List<Scenic> searchAllByName(String name);
 
-    List<Scenic> findAll();
+    List<Scenic> getList(int start, int num);
 
     int insertMsg(Scenic scenic);
 
@@ -43,7 +43,7 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     int updateVideo_pathInt(String name,String video_path);
 
-    int findByNameScenic(String name);
+    List<Scenic> searchScenic(String name);
 
     int InsertScenic(Scenic scenic);
 

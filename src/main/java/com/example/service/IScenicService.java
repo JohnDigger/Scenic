@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 2021-04-01
  */
 public interface IScenicService extends IService<Scenic> {
-    Map<Integer, Object> getList();
+    Map<Integer, Object> getList(int start, int num);
 
     List<Scenic> getByIdPlus(Integer id);
 
