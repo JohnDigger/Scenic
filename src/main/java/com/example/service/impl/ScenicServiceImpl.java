@@ -26,8 +26,8 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
 
     @Override
-    public Map<Integer, Object> getList(int start, int num) {
-        List<Scenic> lis = scenicMapper.getList(start-1,num);
+    public Map<Integer, Object> getList() {
+        List<Scenic> lis = scenicMapper.getList();
         Map<Integer,Object> mp = new HashMap<>();
 
         for (Scenic i:lis){
@@ -82,7 +82,10 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
         return scenicMapper.getScenicByType(typeId);
     }
 
-
+    @Override
+    public List<Scenic> getPage(int start, int num) {
+        return scenicMapper.getPage(start-1,num);
+    }
 
 
 

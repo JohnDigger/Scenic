@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 2021-04-01
  */
 public interface IScenicService extends IService<Scenic> {
-    Map<Integer, Object> getList(int start, int num);
+    Map<Integer, Object> getList();
 
     List<Scenic> getByIdPlus(Integer id);
 
@@ -46,4 +46,6 @@ public interface IScenicService extends IService<Scenic> {
     JsonResult updateVideo(String name,String video_path);
 
     List<Scenic> searchScenic(String Sname);
+
+    List<Scenic> getPage(int start, int num);
 }

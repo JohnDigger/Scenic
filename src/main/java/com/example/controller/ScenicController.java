@@ -54,8 +54,8 @@ public class ScenicController {
     }
 
     @RequestMapping("/getList")
-    public Map<Integer, Object> getList(int start,int num){
-        return scenicService.getList(start,num);
+    public Map<Integer, Object> getList(){
+        return scenicService.getList();
     }
 
     @RequestMapping("/getByIdPlus")
@@ -98,6 +98,10 @@ public class ScenicController {
         return scenicService.searchScenic(Sname);
     }
 
+    @RequestMapping("/getPage")
+    public List<Scenic> getPage(int start,int num) {
+        return scenicService.getPage(start,num);
+    }
 
 
 

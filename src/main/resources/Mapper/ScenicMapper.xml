@@ -10,7 +10,7 @@
         select * from scenic
     </select>
     <select id="getList" resultType="com.example.model.Scenic">
-        SELECT * FROM scenic ORDER BY id LIMIT #{start}, #{num};
+        select * from scenic
     </select>
     <select id="searchAllByName" resultType="com.example.model.Scenic">
         SELECT * from scenic WHERE name LIKE "%"#{name}"%"
@@ -32,6 +32,9 @@
     </select>
     <select id="getScenicByType" resultType="com.example.model.Scenic">
          select * from scenic where type_id=#{typrId}
+    </select>
+    <select id="getPage" resultType="com.example.model.Scenic">
+        SELECT * FROM scenic ORDER BY id LIMIT #{start}, #{num};
     </select>
 
 

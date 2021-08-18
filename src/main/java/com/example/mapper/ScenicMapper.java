@@ -25,7 +25,7 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     List<Scenic> searchAllByName(String name);
 
-    List<Scenic> getList(int start, int num);
+    List<Scenic> getList();
 
     int insertMsg(Scenic scenic);
 
@@ -56,4 +56,6 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
     void saveUserMsg(String nickName, String openId);
 
     List<Scenic> getScenicByType(String typeId);
+
+    List<Scenic> getPage(int start, int num);
 }
