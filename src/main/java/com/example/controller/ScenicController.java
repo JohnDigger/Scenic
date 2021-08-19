@@ -245,6 +245,7 @@ public class ScenicController {
             if (file.isEmpty()) {
                 jsonResult.setCode(1);
 
+
                 jsonResult.setMsg("file null");
                 jsonResult.setData("文件为空");
 
