@@ -9,9 +9,9 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/picture/**").addResourceLocations("file:C:/scenic/picture/");
-        registry.addResourceHandler("/audio/**").addResourceLocations("file:C:/scenic/audio/");
-        registry.addResourceHandler("/video/**").addResourceLocations("file:C:/scenic/video/");
+        registry.addResourceHandler("/picture/**").addResourceLocations("file:D:\\javaweb\\Scenic\\src\\main\\resources\\static\\upload");
+        registry.addResourceHandler("/audio/**").addResourceLocations("file:D:\\javaweb\\Scenic\\src\\main\\resources\\static\\upload");
+//        registry.addResourceHandler("/text/**").addResourceLocations("file:C:/scenic/text/");
 //        registry.addResourceHandler("/list/**").addResourceLocations("file:C:/scenic/list/");
     }
 }

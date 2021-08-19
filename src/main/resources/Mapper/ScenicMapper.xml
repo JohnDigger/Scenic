@@ -39,7 +39,7 @@
 
 
     <insert id="InsertScenic"  parameterType="com.example.model.Scenic" useGeneratedKeys="true" keyProperty="id"  >
-        INSERT INTO scenic(id,name,list,picture_path,audio_path,text) VALUES (#{id},#{name},#{list},#{picturePath},#{audioPath},#{text})
+        INSERT INTO scenic(name,list,picture_path,video_path,text) VALUES (#{name},#{list},#{picturePath},#{videoPath},#{text})
     </insert>
     <insert id="insertMsg" useGeneratedKeys="true" keyProperty="com.example.model.Scenic.id">
         insert into scenic value #(),#(name),#(list),#(picturePath),#(audioPath),#(text)
