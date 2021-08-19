@@ -244,6 +244,7 @@ public class ScenicController {
             //判断文件是否为空
             if (file.isEmpty()) {
                 jsonResult.setCode(1);
+
                 jsonResult.setMsg("file null");
                 jsonResult.setData("文件为空");
 
