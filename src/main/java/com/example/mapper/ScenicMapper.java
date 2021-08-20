@@ -21,7 +21,7 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     List<Scenic> getByIdPlus(Integer id);
 
-    List<Scenic> queryMsg();
+    List<Scenic> queryMsg(int page,int limit);
 
     List<Scenic> searchAllByName(String name);
 

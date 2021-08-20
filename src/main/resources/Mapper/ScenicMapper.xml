@@ -7,7 +7,7 @@
        select * from scenic where id=#{id} UNION select * from scenic where id &lt;&gt; #{id}
     </select>
     <select id="queryMsg" resultType="com.example.model.Scenic">
-        select * from scenic
+        select * from scenic limit #{page},#{limit}
     </select>
     <select id="getList" resultType="com.example.model.Scenic">
         select * from scenic

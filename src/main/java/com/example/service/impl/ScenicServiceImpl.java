@@ -111,12 +111,12 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
 
     @Override
-    public JsonResult queryMsg() {
+    public JsonResult queryMsg(int page,int limit) {
         JsonResult jsonResult = new JsonResult();
         jsonResult.setCode(0);
         jsonResult.setMsg("success");
-        jsonResult.setData(scenicMapper.queryMsg());
-        jsonResult.setCount(scenicMapper.queryMsg().size());
+        jsonResult.setData(scenicMapper.queryMsg(page,limit));
+        jsonResult.setCount(scenicMapper.queryMsg(page,limit).size());
         return jsonResult;
     }
 

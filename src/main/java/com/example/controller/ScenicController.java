@@ -107,9 +107,9 @@ public class ScenicController {
 
 
     //后台管理
-    @RequestMapping("/queryMsg")
-    public JsonResult queryMsg(){
-        return scenicService.queryMsg();
+    @RequestMapping(value = "/queryMsg",method = RequestMethod.POST)
+    public JsonResult queryMsg(@RequestParam(name = "page",required = false,defaultValue = "0") int page,@RequestParam(name = "limit",required = false,defaultValue = "10") int limit){
+        return scenicService.queryMsg(page, limit);
     }
 
     @RequestMapping("/insertMsg")

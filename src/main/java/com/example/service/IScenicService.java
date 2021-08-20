@@ -21,7 +21,7 @@ public interface IScenicService extends IService<Scenic> {
 
     List<Scenic> getByIdPlus(Integer id);
 
-    JsonResult queryMsg();
+    JsonResult queryMsg(int page,int limit);
 
     int insertMsg(Scenic scenic);
 
