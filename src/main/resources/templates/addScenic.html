@@ -8,6 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
     <link href="layui-v2.6.8/layui/css/layui.css" rel="stylesheet"/>
     <link href="step-lay/step.css" rel="stylesheet">
+    <style type="text/css">
+        .layui-input-block {
+
+            position: relative;
+
+        }
+
+        .word {
+
+            position: absolute;
+
+            right: 10px;
+
+            bottom: 10px;
+
+            color: #aaa;
+
+            font-size: 12px;
+
+        }
+
+    </style>
 </head>
 <body>
     <div class="layui-fluid" style="padding: 0;">
@@ -26,25 +48,44 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"><i style="color: red;">*</i>景点名称</label>
                                     <div class="layui-input-block">
-                                        <input type="text" placeholder="请填写入景点的名称" id="name" name="name" class="layui-input" lay-verify="required" required />
-                                        <span style="color:red">景点名称请限制到10个字以内</span>
+                                        <input type="text" placeholder="请填写入景点的名称" id="name" name="name"
+                                               class="layui-input" lay-verify="required" required oninput="titleLeg(this);"onpropertychange="if(value.length>20) value=value.substr(0,20)" maxlength="20"/>
+
                                     </div>
                                 </div>
-                               
+
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"><i style="color: red;">*</i>景点简介</label>
                                     <div class="layui-input-block">
-                                        <textarea placeholder="请输入景点简介" value="" id="list" name="list" class="layui-textarea" lay-verify="required|clength" required></textarea>
-                                        <span style="color:red">景点简介请限制到100个字以上，500字以下</span>
+                                        <!-- <textarea placeholder="请输入景点简介" value="" id="list" name="list"
+                                            class="layui-textarea" lay-verify="required" required></textarea> -->
+                                        <textarea placeholder="请输入景点简介" oninput="wordLeg(this);" maxlength="800"
+                                                  onpropertychange="if(value.length>800) value=value.substr(0,800)"
+                                                  name="list" class="layui-textarea" id="list" lay-verify="required"
+                                                  required></textarea>
+
+                                        <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span
+                                                class="num_count" id="numCount">800</span></div>
                                     </div>
                                 </div>
-								<div class="layui-form-item">
-								    <label class="layui-form-label"><i style="color: red;">*</i>景点解说词</label>
-								    <div class="layui-input-block">
-								        <textarea placeholder="请输入景点解说词" value="" id="text" name="text" class="layui-textarea" lay-verify="required|nlength" required></textarea>
-                                        <span style="color:red">景点简介请限制到100个字以上，1200字以下</span>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i style="color: red;">*</i>景点解说词</label>
+                                    <div class="layui-input-block">
+                                        <!-- <textarea placeholder="请输入景点解说词" value="" id="text" name="text"
+                                            class="layui-textarea" lay-verify="required" required></textarea> -->
+                                        <textarea placeholder="请输入景点解说词" oninput="wordLimit(this);" maxlength="1200"
+                                                  onpropertychange="if(value.length>1200) value=value.substr(0,1200)"
+                                                  name="text" class="layui-textarea" id="text" lay-verify="required"
+                                                  required></textarea>
+                                        <!-- <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span
+                                                    class="num_count" id="numCount">1200</span></div>
+                                        </div> -->
+                                        <div class="word">
+                                            <span class="text_count">0</span>&nbsp;/&nbsp; <span class="num_count" id="numCount">1200</span>
+                                        </div>
+
                                     </div>
-								</div>
+                                </div>
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
                                         <button class="layui-btn" lay-submit lay-filter="formStep">
@@ -160,8 +201,55 @@
                     title: '完成'
                 }]
             });
-			
-			
+
+            window.titleLeg = (obj) =>{
+
+                var currleg = $(obj).val().length;
+
+                var length = $(obj).attr('maxlength');
+
+                if (currleg > length) {
+
+                    layer.msg('字数请在' + length + '字以内');
+
+                }
+
+            }
+
+            window.wordLeg = (obj) =>{
+
+                var currleg = $(obj).val().length;
+
+                var length = $(obj).attr('maxlength');
+
+                if (currleg > length) {
+
+                    layer.msg('字数请在' + length + '字以内');
+
+                } else {
+
+                    $('.text_count').text(currleg);
+
+                }
+
+            }
+            window.wordLimit = (obj) =>{
+
+                var currleg = $(obj).val().length;
+
+                var length = $(obj).attr('maxlength');
+
+                if (currleg > length) {
+
+                    layer.msg('字数请在' + length + '字以内');
+
+                } else {
+
+                    $('.text_count').text(currleg);
+
+                }
+
+            }
 			
             form.on('submit(formStep)', function (data) {
 				let formData = data.field;

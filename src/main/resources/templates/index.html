@@ -105,6 +105,7 @@
 			url: "/scenic/queryMsg", //数据接口
 			page: true,
 			loading: true,
+			cellMinWidth:80,
 			done: function(res, curr, count) { //表格数据加载完后的事件
 				//调用示例
 				layer.photos({//点击图片弹出
@@ -120,6 +121,8 @@
 
 				//     //得到数据总量
 				//     console.log(count);
+				//让表格内容自适应
+				$('table').width('100%')
 				//加载
 				$('.video-m').click(function () {
 					vUrl = $(this).attr('src');  //获取到播放的url
@@ -187,7 +190,7 @@
 					{
 						field: 'text',
 						title: '解说词',
-						width: 750,
+						width: 600,
 
 
 					},
