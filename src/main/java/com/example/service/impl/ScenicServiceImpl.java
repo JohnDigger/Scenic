@@ -78,8 +78,8 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     }
 
     @Override
-    public List<Scenic> getScenicByType(String typeId) {
-        return scenicMapper.getScenicByType(typeId);
+    public List<Scenic> getScenicByType(String type) {
+        return scenicMapper.getScenicByType(type);
     }
 
     @Override

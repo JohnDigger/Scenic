@@ -90,8 +90,8 @@ public class ScenicController {
     }
 
     @RequestMapping("/getScenicByType")
-    public List<Scenic> getScenicByType(String typeId) {
-        return scenicService.getScenicByType(typeId);
+    public List<Scenic> getScenicByType(String type) {
+        return scenicService.getScenicByType(type);
     }
 
     @RequestMapping("/search")
@@ -103,6 +103,11 @@ public class ScenicController {
     public List<Scenic> getPage(int start,int num) {
         return scenicService.getPage(start,num);
     }
+
+
+
+
+
 
 
 
@@ -211,9 +216,9 @@ public class ScenicController {
 //            logger.info("product添加getOriginalFilename:" + JSON.toJSON(attach.getOriginalFilename()));
 //            logger.info("product添加path:" + JSON.toJSON(path));
 //            product.setImg(picName);
-            scenic.setPicturePath("http://localhost:8080/upload/"+picName);
+            scenic.setPicturePath("http://localhost:80/upload/"+picName);
 //            productService.addImg(product);
-            scenicMapper.updateByName(name,"http://localhost:8080/upload/"+picName);
+            scenicMapper.updateByName(name,"http://localhost:80/upload/"+picName);
             System.out.println(name);
             try {
 
@@ -286,7 +291,7 @@ public class ScenicController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:8080/upload/"+fileName;
+                url="http://localhost:80/upload/"+fileName;
                 return scenicService.updateVideo(name,url);
 
             } catch (IOException e) {
@@ -352,7 +357,7 @@ public class ScenicController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:8080/upload/"+fileName;
+                url="http://localhost:80/upload/"+fileName;
                 return scenicService.updateVideo(name,url);
 
             } catch (IOException e) {

@@ -16,10 +16,10 @@
         SELECT * from scenic WHERE name LIKE "%"#{name}"%"
     </select>
     <select id="getMoney" resultType="com.example.model.Audio">
-        select audio_id,scenic_id,box_id,scenic_name, CONCAT(audio_name," ",audio_money,"元") as audio_name_and_money from audio where scenic_id = #{scenicId}
+        select audio_id,scenic_id,scenic_name, CONCAT(audio_name," ",audio_money,"元") as audio_name_and_money from audio where scenic_id = #{scenicId}
     </select>
     <select id="getAudio" resultType="com.example.model.Scenic" >
-        SELECT scenic.id,scenic.`name`,scenic.list,scenic.picture_path,scenic.video_path,scenic.text,audio.audio_id,audio.box_id,audio.scenic_name,audio.audio_url,audio.audio_name,audio.audio_money FROM scenic,audio WHERE scenic.id = audio.scenic_id AND audio.audio_id = #{audioId}
+        SELECT scenic.id,scenic.`name`,scenic.list,scenic.picture_path,scenic.video_path,scenic.text,audio.audio_id,audio.scenic_name,audio.audio_url,audio.audio_name,audio.audio_money FROM scenic,audio WHERE scenic.id = audio.scenic_id AND audio.audio_id = #{audioId}
     </select>
     <select id="searchScenic" resultType="com.example.model.Scenic">
         select * from scenic where name LIKE "%"#{name}"%"
@@ -31,7 +31,7 @@
         select * from t_user u where u.open_id = #{openId}
     </select>
     <select id="getScenicByType" resultType="com.example.model.Scenic">
-         select * from scenic where type_id=#{typrId}
+         select * from scenic where type=#{type}
     </select>
     <select id="getPage" resultType="com.example.model.Scenic">
         SELECT * FROM scenic ORDER BY id LIMIT #{start}, #{num};
