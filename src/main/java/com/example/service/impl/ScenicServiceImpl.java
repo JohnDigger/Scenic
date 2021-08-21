@@ -116,7 +116,7 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
         jsonResult.setCode(0);
         jsonResult.setMsg("success");
         jsonResult.setData(scenicMapper.queryMsg(page,limit));
-        jsonResult.setCount(scenicMapper.queryMsg(page,limit).size());
+        jsonResult.setCount(scenicMapper.getCount());
         return jsonResult;
     }
 

@@ -58,4 +58,6 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
     List<Scenic> getScenicByType(String type);
 
     List<Scenic> getPage(int start, int num);
+
+    int getCount();
 }

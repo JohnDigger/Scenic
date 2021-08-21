@@ -36,7 +36,8 @@
     </select>
 
     <select id="getAll" resultType="com.example.model.TBuy">
-    select * from t_buy limit #{page},#{limit}
+
+        select * from t_buy limit ${(page-1)*limit},${limit}
     </select>
 
     <select id="OrderNum" resultType="java.lang.Integer">

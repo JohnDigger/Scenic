@@ -63,13 +63,14 @@ public class BuyController {
         return service.getScenicCount();
     }
 
-    @RequestMapping(value = "queryOrder",method = RequestMethod.POST)
+    @RequestMapping(value = "queryOrder",method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult getOrder(@RequestParam(name = "page",required = false,defaultValue = "0") int page, @RequestParam(name = "limit",required = false,defaultValue = "10") int limit){
+    public JsonResult getOrder(@RequestParam(name = "page",required = false,defaultValue = "1") int page,@RequestParam(name = "limit",required = false,defaultValue = "10") int limit){
         JsonResult jr = new JsonResult();
         jr.setCode(0);
         jr.setMsg("success");
         jr.setCount(service.getOderNum());
+//        jr.setCount(10);
         jr.setData(service.getOrder(page,limit));
         return jr;
     }
