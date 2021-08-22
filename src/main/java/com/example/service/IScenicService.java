@@ -21,7 +21,7 @@ public interface IScenicService extends IService<Scenic> {
 
     List<Scenic> getByIdPlus(Integer id);
 
-    JsonResult queryMsg();
+    JsonResult queryMsg(int page,int limit);
 
     int insertMsg(Scenic scenic);
 
@@ -41,9 +41,11 @@ public interface IScenicService extends IService<Scenic> {
 
     int saveUserMsg(String nickName, String openId);
 
-    List<Scenic> getScenicByType(String typeId);
+    List<Scenic> getScenicByType(String type);
 
     JsonResult updateVideo(String name,String video_path);
 
     List<Scenic> searchScenic(String Sname);
+
+    List<Scenic> getPage(int start, int num);
 }

@@ -12,6 +12,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/picture/**").addResourceLocations("file:C:/scenic/picture/");
         registry.addResourceHandler("/audio/**").addResourceLocations("file:C:/scenic/audio/");
         registry.addResourceHandler("/video/**").addResourceLocations("file:C:/scenic/video/");
+//        registry.addResourceHandler("/text/**").addResourceLocations("file:C:/scenic/text/");
 //        registry.addResourceHandler("/list/**").addResourceLocations("file:C:/scenic/list/");
     }
 }

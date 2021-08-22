@@ -120,7 +120,26 @@ public class UserController {
 
         return "paid_information";
     }
+    @RequestMapping("addScenic")
+    public String AddScenic(HttpServletRequest request){
+        //统一拦截（查询当前session是否存在user）(这里user会在每次登陆成功后，写入session)
+        User user=(User)request.getSession().getAttribute("USER");
+        if(user==null){
+            return "login";
+        }
 
+        return "addScenic";
+    }
+    @RequestMapping("update")
+    public String update(HttpServletRequest request){
+        //统一拦截（查询当前session是否存在user）(这里user会在每次登陆成功后，写入session)
+        User user=(User)request.getSession().getAttribute("USER");
+        if(user==null){
+            return "login";
+        }
+
+        return "layer_update";
+    }
 }
 
 

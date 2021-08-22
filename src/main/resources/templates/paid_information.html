@@ -19,7 +19,7 @@
 			<div class="layui-header layui-bg-cyan">
 				<ul class="layui-nav layui-bg-cyan ">
 					<li class="layui-nav-item"><a th:href="@{/index}">景点信息</a></li>
-					<li class="layui-nav-item"><a th:href="@{/addInfo}">景点添加</a></li>
+					<li class="layui-nav-item"><a th:href="@{/addScenic}">景点添加</a></li>
 					<li class="layui-nav-item layui-this"><a href="">订单信息</a></li>
 					<li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
 				</ul>
@@ -43,7 +43,7 @@
 					</div>
 					<button type="button" class="layui-btn" id="searchBtn">搜索</button>
 				</div>
-				<table id="dataView" lay-filter='topCheck' data-type="reload"></table>
+				<table id="dataView" class="layui-hide" ></table>
 
 			</div>
 		</div>
@@ -52,17 +52,19 @@
 		<script type="text/javascript">
 			//导航依赖于element模块
 			layui.use(['element', 'table'], function() {
-				var element = layui.element;
-				var table = layui.table;
-				var $ = layui.jquery;
+				const element = layui.element;
+				const table = layui.table;
+				const $ = layui.jquery;
 				//加载
 				table.render({
 					title:'用户订单',
 					elem: "#dataView",
 					url: "/queryOrder", //数据接口
 					page: true,
+					limits:[10,20,30,40,50,100],
+					limit:10,
 					loading: true,
-					method:"POST",
+					// method:"POST",
 					cols: [
 						[
 							//设置序列号列

@@ -21,11 +21,11 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     List<Scenic> getByIdPlus(Integer id);
 
-    List<Scenic> queryMsg();
+    List<Scenic> queryMsg(int page,int limit);
 
     List<Scenic> searchAllByName(String name);
 
-    List<Scenic> findAll();
+    List<Scenic> getList();
 
     int insertMsg(Scenic scenic);
 
@@ -43,7 +43,7 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     int updateVideo_pathInt(String name,String video_path);
 
-    int findByNameScenic(String name);
+    List<Scenic> searchScenic(String name);
 
     int InsertScenic(Scenic scenic);
 
@@ -55,5 +55,9 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
 
     void saveUserMsg(String nickName, String openId);
 
-    List<Scenic> getScenicByType(String typeId);
+    List<Scenic> getScenicByType(String type);
+
+    List<Scenic> getPage(int start, int num);
+
+    int getCount();
 }

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>景点添加</title>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+    <link href="layui-v2.6.8/layui/css/layui.css" rel="stylesheet"/>
+    <link href="step-lay/step.css" rel="stylesheet">
+    <style type="text/css">
+        .layui-input-block {
+
+            position: relative;
+
+        }
+
+        .word {
+
+            position: absolute;
+
+            right: 10px;
+
+            bottom: 10px;
+
+            color: #aaa;
+
+            font-size: 12px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="layui-fluid" style="padding: 0;">
+		<ul class="layui-nav layui-bg-cyan ">
+			<li class="layui-nav-item "><a th:href="@{/index}">景点信息</a></li>
+			<li class="layui-nav-item layui-this"><a th:href="@{/addScenic}">景点添加</a></li>
+            <li class="layui-nav-item"><a th:href="@{/pay}">订单信息</a></li>
+            <li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
+		</ul>
+        <div class="layui-card">
+            <div class="layui-card-body" style="padding-top: 40px;">
+                <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto;">
+                    <div carousel-item>
+                        <div>
+                            <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i style="color: red;">*</i>景点名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" placeholder="请填写入景点的名称" id="name" name="name"
+                                               class="layui-input" lay-verify="required" required oninput="titleLeg(this);"onpropertychange="if(value.length>20) value=value.substr(0,20)" maxlength="20"/>
+
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i style="color: red;">*</i>景点简介</label>
+                                    <div class="layui-input-block">
+                                        <!-- <textarea placeholder="请输入景点简介" value="" id="list" name="list"
+                                            class="layui-textarea" lay-verify="required" required></textarea> -->
+                                        <textarea placeholder="请输入景点简介" oninput="wordLeg(this);" maxlength="800"
+                                                  onpropertychange="if(value.length>800) value=value.substr(0,800)"
+                                                  name="list" class="layui-textarea" id="list" lay-verify="required"
+                                                  required></textarea>
+
+                                        <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span
+                                                class="num_count" id="numCount">800</span></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i style="color: red;">*</i>景点解说词</label>
+                                    <div class="layui-input-block">
+                                        <!-- <textarea placeholder="请输入景点解说词" value="" id="text" name="text"
+                                            class="layui-textarea" lay-verify="required" required></textarea> -->
+                                        <textarea placeholder="请输入景点解说词" oninput="wordLimit(this);" maxlength="1200"
+                                                  onpropertychange="if(value.length>1200) value=value.substr(0,1200)"
+                                                  name="text" class="layui-textarea" id="text" lay-verify="required"
+                                                  required></textarea>
+                                        <!-- <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span
+                                                    class="num_count" id="numCount">1200</span></div>
+                                        </div> -->
+                                        <div class="word">
+                                            <span class="text_count">0</span>&nbsp;/&nbsp; <span class="num_count" id="numCount">1200</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="formStep">
+                                            &emsp;下一步&emsp;
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+						
+                        <div>
+                            <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label" style="text-align: right;">图片:</label>
+                                   <!-- <div class="layui-input-block">
+                                        <div class="layui-form-mid layui-word-aux">639537</div>
+                                    </div> -->
+									<div class="layui-input-block">
+									
+										<div class="layui-upload">
+											<button type="button" class="layui-btn" id="uploadImg">上传图片</button>
+											<button type="button" class="layui-btn" style="display: none;" id = "img">开始上传</button>
+											<div class="layui-upload-list">
+												<img class="layui-upload-img" id="imgUpload" width="100px" height="80px">
+												<p id="uploadText"></p>
+											</div>
+											<div style="width: 95px;">
+												<div class="layui-progress layui-progress-big" lay-showpercent="yes"
+													lay-filter="progressbar">
+													<div class="layui-progress-bar" lay-percent=""></div>
+												</div>
+											</div>
+										</div>
+									
+										<a name="list-progress"> </a>
+									</div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label" style="text-align: right;">视频:</label>
+                                    <div class="layui-input-block">
+                                    	<div class="layui-upload-drag" id="uploadVideo">
+                                    		<i class="layui-icon"></i>
+                                    		<p>点击上传，或将文件拖拽到此处</p>
+                                    		<div class="layui-hide" id="uploadVideoView">
+                                    			<hr>
+                                    			<img src="" alt="上传成功后渲染" style="max-width: 100%">
+                                    		</div>
+                                    	</div>
+										<button type="button" class="layui-btn" style="display: none;" id = "video">开始上传</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
+                                        <button class="layui-btn" lay-submit lay-filter="formStep2" id = "btn">
+                                            &emsp;确认提交&emsp;
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <div style="text-align: center;margin-top: 90px;">
+                                <i class="layui-icon layui-circle"
+                                   style="color: white;font-size:30px;font-weight:bold;background: #52C41A;padding: 20px;line-height: 80px;">&#xe605;</i>
+                                <div style="font-size: 24px;color: #333;font-weight: 500;margin-top: 30px;">
+                                    添加成功
+                                </div>
+                                <div style="font-size: 14px;color: #666;margin-top: 20px;">注意：请勿重复添加</div>
+                            </div>
+                            <div style="text-align: center;margin-top: 50px;">
+                                <button class="layui-btn next">再添加一个</button>
+                                <button class="layui-btn layui-btn-primary">查看景点</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div style="color: #666;margin-top: 30px;margin-bottom: 40px;padding-left: 30px;">
+                    <h3>说明</h3><br>
+                    <h4>请不要重复提交景点，如若在点击提交后还存在有问题需要修改的，请到主页出进行数据更新</h4>
+                    <p>请确保数据准确无误后提交</p>
+                    <!-- <br><h4>入款到现金</h4>
+                    <p>如果需要，这里可以放一些关于产品的常见问题说明。</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="layui-v2.6.8/layui/layui.js"></script>
+    <script src="step-lay/step.js"></script>
+    <script>
+        layui.config({
+            base:'step-lay/'
+        }).use([ 'form', 'step','jquery','upload','element'], function () {
+            var $ = layui.$
+                , form = layui.form
+                , step = layui.step
+				upload = layui.upload
+				element = layui.element;
+
+            step.render({
+                elem: '#stepForm',
+                filter: 'stepForm',
+                width: '100%', //设置容器宽度
+                stepWidth: '750px',
+                height: '500px',
+                stepItems: [{
+                    title: '景点添加'
+                }, {
+                    title: '景点文件上传'
+                }, {
+                    title: '完成'
+                }]
+            });
+
+            window.titleLeg = (obj) =>{
+
+                var currleg = $(obj).val().length;
+
+                var length = $(obj).attr('maxlength');
+
+                if (currleg > length) {
+
+                    layer.msg('字数请在' + length + '字以内');
+
+                }
+
+            }
+
+            window.wordLeg = (obj) =>{
+
+                var currleg = $(obj).val().length;
+
+                var length = $(obj).attr('maxlength');
+
+                if (currleg > length) {
+
+                    layer.msg('字数请在' + length + '字以内');
+
+                } else {
+
+                    $('.text_count').text(currleg);
+
+                }
+
+            }
+            window.wordLimit = (obj) =>{
+
+                var currleg = $(obj).val().length;
+
+                var length = $(obj).attr('maxlength');
+
+                if (currleg > length) {
+
+                    layer.msg('字数请在' + length + '字以内');
+
+                } else {
+
+                    $('.text_count').text(currleg);
+
+                }
+
+            }
+			
+            form.on('submit(formStep)', function (data) {
+				let formData = data.field;
+				let name = formData.name,
+				list = formData.list,
+				text = formData.text;
+
+				window.Tname = name;
+				window.Ttext = text;
+				window.Tlist = list;
+                step.next('#stepForm');
+				
+                return false;
+            });
+			
+            form.on('submit(formStep2)', function (data) {
+				
+				$.ajax({
+					url: 'scenic/insertText',
+					data: {
+						'name': Tname,
+						'list': Tlist,
+						'text': Ttext,
+					},
+					async: false,
+                    traditional: true,
+					type: "post",
+					dataType: "jsonp",
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},beforeSend:function(){
+						console.log(Tname);
+						if(Tname == "" || Tlist == "" || Ttext == ""){
+							layer.msg("必填信息项为空");
+							return false;
+						}
+					},
+					success:function(rec){
+						var code = rec[0].code;
+						var recive_data = rec[0].data.id
+					
+						if(code==0){
+							var mg = layer.msg("提交成功",{time:5000,anim:6});
+							layer.close(mg);
+					
+						}else if(code == 5){
+							layer.msg("景区名重复");
+						};
+					},
+				});
+				
+			
+                step.next('#stepForm');
+                return false;
+            });
+
+            form.verify({
+                clength: (value) =>{
+                    let i, sum;
+                    sum=0;
+                    for(i=0;i<value.length;i++){
+                        if ((value.charCodeAt(i)>=0) && (value.charCodeAt(i)<=255))
+                            sum=sum+1;
+                        else
+                            sum=sum+2;
+                    }
+                    if (sum > 500) {
+                        return '景点简介最多只能500字';
+                    }else if(sum <100){
+                        return "景点简介最少必须多余100字";
+                    }
+                },
+
+
+                nlength:  (value) =>{
+                    let i, sum;
+                    sum=0;
+                    for(i=0;i<value.length;i++){
+                        if ((value.charCodeAt(i)>=0) && (value.charCodeAt(i)<=255))
+                            sum=sum+1;
+                        else
+                            sum=sum+2;
+                    }
+                    if (sum < 100) {
+                        return "景点简介最少必须多余100字";
+                    }else if (sum > 1200){
+                        return '景点简介最多只能1200字';
+                    }
+                }
+            });
+
+			
+			var uploadInst = upload.render({
+				elem: '#uploadImg',
+				url: 'scenic/addInfo' //改成您自己的上传接口
+					,
+				data: {
+			
+				},
+				field: 'attachs',
+				auto:false,
+				bindAction:'#img',
+				time:5000,
+				choose: function(obj) {
+			
+					obj.preview(function(index, file, result) {
+						$('#imgUpload').attr('src', result); //图片链接（base64）
+					});
+					
+					element.progress('progressbar', '0%'); //进度条复位
+				},before:function(obj){
+					this.data.name = Tname;
+					//预读本地文件示例，不支持ie8
+					if (!Tname) {
+						layer.alert("景区名称不能为空")
+						stopPropagation();
+					}
+					element.progress('progressbar', '0%'); //进度条复位
+					layer.msg('上传中', {
+						icon: 16,
+						time: 0
+					});
+				},
+				done: function(res) {
+					// console.log(res);
+					//如果上传失败
+					if (res.code > 0) {
+						return layer.msg('上传失败');
+					};
+					//上传成功的一些操作
+					//……
+			
+					$('#uploadText').html(''); //置空上传失败的状态
+					if (res.code == 0) {
+						layer.msg(res.msg, {
+							anim: 6,
+							icon: 4
+						});
+					};
+				},
+				error: function() {
+						//演示失败状态，并实现重传
+						var uploadText = $('#uploadText');
+						uploadText.html(
+							'<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs retry-reload">重试</a>'
+						);
+						uploadText.find('.retry-reload').on('click', function() {
+							uploadInst.upload();
+						});
+					}
+					//进度条
+					,
+				progress: function(n, elem, e) {
+					element.progress('progressbar', n + '%'); //可配合 layui 进度条元素使用
+					if (n == 100) {
+						layer.msg('上传完毕', {
+							icon: 1
+						});
+					}
+				}
+			});
+			
+			 upload.render({
+				elem: '#uploadVideo',
+				url: 'scenic/uploadVideo' //改成您自己的上传接口
+					,
+				data: {
+			
+				},
+				field: 'attachs',
+				accept: 'video',
+				drag: true,
+				auto:false,
+				bindAction:'#video',
+				done: function(res) {
+					layer.msg('上传成功');
+					layui.$('#uploadVideoView').removeClass('layui-hide').find('img').attr('src', res
+						.files.file);
+					console.log(res)
+				},
+				before: function() {
+					this.data.name = Tname;
+			
+					if (!Tname) {
+						layer.alert("景区名称不能为空")
+						stopPropagation();
+					}
+					layer.msg('上传中', {
+						icon: 16,
+						time: 0
+					});
+				},
+				done: function(res) {
+					console.log(res);
+					if (res.code != 1) {
+						layer.msg("上传失败", {
+							anim: 6
+						})
+					} else if (res.code == 1) {
+						layer.msg("上传成功", {
+							anim: 6
+						})
+					}
+				}
+			});
+			document.getElementById("btn").addEventListener("click",()=>{
+				document.getElementById("img").click();
+				document.getElementById("video").click();
+			})
+            $('.pre').click(function () {
+                step.pre('#stepForm');
+            });
+
+            $('.next').click(function () {
+                step.next('#stepForm');
+            });
+        })
+    </script>
+</body>
+</html>

@@ -43,7 +43,7 @@
 				</form>
 				<div class="login">
 					<p class="blog_txt">黄龙景区后台管理系统</p>
-					<input class="btn" type="submit" value="登录" lay-filter="login_sub" lay-submit />
+					<input class="btn" type="submit" value="登录" lay-filter="login_sub" lay-submit id = "subbTN"/>
 				</div>
 
 			</div>
@@ -64,6 +64,17 @@
 			// 		return false; // 返回假
 			// 	}
 			// }
+			$(()=>{
+				//回车登录
+				$("body").keyup((event)=>{
+					if(event.keyCode==13) {//keyCode=13是回车键
+						$("#subbTN").click();
+					}
+				});
+
+
+			});
+
 			layui.use(['form', 'jquery'], function() {
 				var form = layui.form;
 				var $ = layui.jquery;

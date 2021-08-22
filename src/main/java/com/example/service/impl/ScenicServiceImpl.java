@@ -27,7 +27,7 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
     @Override
     public Map<Integer, Object> getList() {
-        List<Scenic> lis = scenicMapper.findAll();
+        List<Scenic> lis = scenicMapper.getList();
         Map<Integer,Object> mp = new HashMap<>();
 
         for (Scenic i:lis){
@@ -74,16 +74,18 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
     @Override
     public List<Scenic> searchScenic(String Sname) {
-        int id = scenicMapper.findByNameScenic(Sname);
-        return scenicMapper.getByIdPlus(id);
+        return scenicMapper.searchScenic(Sname);
     }
 
     @Override
-    public List<Scenic> getScenicByType(String typeId) {
-        return scenicMapper.getScenicByType(typeId);
+    public List<Scenic> getScenicByType(String type) {
+        return scenicMapper.getScenicByType(type);
     }
 
-
+    @Override
+    public List<Scenic> getPage(int start, int num) {
+        return scenicMapper.getPage(start-1,num);
+    }
 
 
 
@@ -109,12 +111,12 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
 
     @Override
-    public JsonResult queryMsg() {
+    public JsonResult queryMsg(int page,int limit) {
         JsonResult jsonResult = new JsonResult();
         jsonResult.setCode(0);
         jsonResult.setMsg("success");
-        jsonResult.setData(scenicMapper.queryMsg());
-        jsonResult.setCount(scenicMapper.queryMsg().size());
+        jsonResult.setData(scenicMapper.queryMsg(page,limit));
+        jsonResult.setCount(scenicMapper.getCount());
         return jsonResult;
     }
 
