@@ -45,10 +45,10 @@
 
 
     <insert id="InsertScenic"  parameterType="com.example.model.Scenic" useGeneratedKeys="true" keyProperty="id"  >
-        INSERT INTO scenic(name,list,picture_path,video_path,text) VALUES (#{name},#{list},#{picturePath},#{videoPath},#{text})
+        INSERT INTO scenic(name,list,picture_path,video_path,text,scenic_type) VALUES (#{name},#{list},#{picturePath},#{videoPath},#{text},#{scenicType})
     </insert>
     <insert id="insertMsg" useGeneratedKeys="true" keyProperty="com.example.model.Scenic.id">
-        insert into scenic value #(),#(name),#(list),#(picturePath),#(audioPath),#(text)
+        insert into scenic value #(scenic_type),#(name),#(list),#(picturePath),#(videoPath),#(text)
     </insert>
     <insert id="saveUserBuyMsg">
         INSERT INTO t_buy(scenic_id,scenic_name,user_id,nick_name,audio_id,audio_name,audio_money,buy_time)

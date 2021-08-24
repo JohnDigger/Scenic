@@ -16,20 +16,20 @@
         <tr>
             <td class="item">编号</td>
             <td>
-                <input id="layerid" readonly="readonly" class="layui-input" style="width:250px;">
+                <input id="layerid" name="layerid" readonly="readonly" class="layui-input" style="width:250px;">
             </td>
 
         </tr>
         <tr>
             <td class="item">景点名</td>
             <td>
-                <input id="layername" class="layui-input" style="width:250px;">
+                <input id="layername" class="layui-input" name="layername" style="width:250px;">
             </td>
         </tr>
         <tr>
             <td class="item">简介</td>
             <td>
-                <textarea placeholder="请输入内容" class="layui-textarea" id="layerlist"></textarea>
+                <textarea placeholder="请输入内容" name="layerlist" class="layui-textarea" id="layerlist"></textarea>
             </td>
         </tr>
 
@@ -37,6 +37,13 @@
             <td class="item">解说词</td>
             <td>
                 <textarea placeholder="请输入内容" class="layui-textarea" id="layertext" style="height: 400px;"></textarea>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="item">类型</td>
+            <td>
+                <input id="layertype" class="layui-input" name="layertype" style="width:250px;">
 
             </td>
         </tr>
@@ -171,50 +178,65 @@
                 }
             }
         });
-
         upload.render({
-            elem: '#uploadVideo',
-            url: '/scenic/uploadVideo' //改成您自己的上传接口
-            ,
-            data: {
-
-            },
-            field: 'attachs',
+            elem:'#uploadVideo',
+            url: '/scenic/uploadVideo',
+            field:'attachs',
             accept: 'video',
             drag: true,
             auto: false,
             bindAction: '#video',
-            done: function(res) {
-                layer.msg('上传成功');
-                layui.$('#uploadVideoView').removeClass('layui-hide').find('img').attr('src', res
-                    .files.file);
-                console.log(res)
-            },
             before: function() {
-                this.data.name = $("#layername").val();
+                    this.data.name = $("#layername").val();
 
-                if (!$("#layername").val()) {
-                    layer.alert("景区名称不能为空")
-                    stopPropagation();
+                    if (!$("#layername").val()) {
+                        layer.alert("景区名称不能为空")
+                        stopPropagation();
+                    }
+                    layer.msg('上传中', {
+                        icon: 16,
+                        time: 0
+                    });
                 }
-                layer.msg('上传中', {
-                    icon: 16,
-                    time: 0
-                });
-            },
-            done: function(res) {
-                console.log(res);
-                if (res.code != 1) {
-                    layer.msg("上传失败", {
-                        anim: 6
-                    })
-                } else if (res.code == 1) {
-                    layer.msg("上传成功", {
-                        anim: 6
-                    })
-                }
-            }
-        });
+        })
+        // upload.render({
+        //     elem: '#uploadVideo',
+        //     url: '/scenic/uploadVideo' //改成您自己的上传接口
+        //     ,
+        //     data: {
+        //
+        //     },
+        //     field: 'attachs',
+        //     accept: 'video',
+        //     drag: true,
+        //     auto: false,
+        //     bindAction: '#video',
+        //
+        //     before: function() {
+        //         this.data.name = $("#layername").val();
+        //
+        //         if (!$("#layername").val()) {
+        //             layer.alert("景区名称不能为空")
+        //             stopPropagation();
+        //         }
+        //         layer.msg('上传中', {
+        //             icon: 16,
+        //             time: 0
+        //         });
+        //     },
+        //     done: function(res) {
+        //         console.log(res);
+        //         if (res.code != 1) {
+        //             layer.msg("上传失败", {
+        //                 anim: 6
+        //             })
+        //         } else if (res.code == 1) {
+        //             layer.msg("上传成功", {
+        //                 anim: 6
+        //             })
+        //         }
+        //     }
+        // });
     })
 </script>
 </body>

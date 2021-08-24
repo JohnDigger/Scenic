@@ -59,7 +59,8 @@ public class AudioController {
             fileName = FileNameUtil.getFileName(fileName);
             System.out.print("（加个时间戳，尽量避免文件名称重复）保存的文件名为: "+fileName+"\n");
             //获取当前工程文件路径
-            String realpath = this.getClass().getResource("/static/upload/").getPath();
+//            String realpath = this.getClass().getResource("/static/upload/").getPath();
+            String realpath = "C:/scenic/audio/";
             //加个时间戳，尽量避免文件名称重复
             String path = realpath + fileName;
             //文件绝对路径
@@ -89,7 +90,7 @@ public class AudioController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:8080/upload/"+fileName;
+                url="http://119.23.61.114:80/audio/"+fileName;
                 audio.setAudioUrl(url);
                 iAudioService.insertAudio(audio);
                 jsonResult.setCode(0);
@@ -178,7 +179,7 @@ public class AudioController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:80/audio/"+fileName;
+                url="http://119.23.61.114:80/audio/"+fileName;
                 audio.setAudioUrl(url);
                 jsonResult = iAudioService.updateAll(audio);
 

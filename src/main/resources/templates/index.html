@@ -322,6 +322,8 @@
 						inp2.val(list);
 						var inp3 = $(layero).find("iframe").contents().find("#layertext");
 						inp3.val(text);
+						var inp5 = $(layero).find("iframe").contents().find("#layertype");
+						inp5.val(type)
 					},
 					btn: ['立即提交', '取消'],
 					yes: function(index, layero) {
@@ -334,7 +336,8 @@
 								'id':  $(layero).find("iframe").contents().find("#layerid").val(),
 								'list': $(layero).find("iframe").contents().find("#layerlist").val(),
 								'name':  $(layero).find("iframe").contents().find("#layername").val(),
-								'text': $(layero).find("iframe").contents().find("#layertext").val()
+								'text': $(layero).find("iframe").contents().find("#layertext").val(),
+								'type': $(layero).find("iframe").contents().find("#layertype").val(),
 							},
 							async: false,
 							type: "post",

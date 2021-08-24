@@ -218,9 +218,9 @@ public class ScenicController {
 //            logger.info("product添加getOriginalFilename:" + JSON.toJSON(attach.getOriginalFilename()));
 //            logger.info("product添加path:" + JSON.toJSON(path));
 //            product.setImg(picName);
-            scenic.setPicturePath("http://localhost:80/picture/"+picName);
+            scenic.setPicturePath("http://119.23.61.114:80/picture/"+picName);
 //            productService.addImg(product);
-            scenicMapper.updateByName(name,"http://localhost:80/picture/"+picName);
+            scenicMapper.updateByName(name,"http://119.23.61.114:80/picture/"+picName);
             System.out.println(name);
             try {
 
@@ -242,7 +242,7 @@ public class ScenicController {
 
 
 
-    @RequestMapping(value="/uploadVideo",produces="application/json;charset=UTF-8")
+    @RequestMapping(value="/uploadVideo")
     @ResponseBody
     public JsonResult uploadFile(@RequestParam("attachs") MultipartFile[] files,@Validated @RequestParam(value = "name",required = true) String name) {
         JsonResult jsonResult = new JsonResult();
@@ -293,7 +293,7 @@ public class ScenicController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:80/video/"+fileName;
+                url="http://119.23.61.114:80/video/"+fileName;
                 return scenicService.updateVideo(name,url);
 
             } catch (IOException e) {

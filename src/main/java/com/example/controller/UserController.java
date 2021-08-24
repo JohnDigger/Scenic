@@ -148,7 +148,7 @@ public class UserController {
             return "login";
         }
 
-        return "audioList";
+        return "AudioList";
     }
     @RequestMapping("audioUpdate")
     public String audioUpdate(HttpServletRequest request){
