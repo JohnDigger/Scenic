@@ -39,6 +39,9 @@
     <select id="getCount" resultType="java.lang.Integer">
         select count(*) from scenic
     </select>
+    <select id="queryAllByName" resultType="java.lang.Integer">
+        select id from scenic where name  = #{name}
+    </select>
 
 
     <insert id="InsertScenic"  parameterType="com.example.model.Scenic" useGeneratedKeys="true" keyProperty="id"  >

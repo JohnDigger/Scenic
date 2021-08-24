@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+    <title>音频上传</title>
+    <link rel="stylesheet" type="text/css" href="layui-v2.6.8/layui/css/layui.css" />
+    <script src="layui-v2.6.8/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        .laycontent {
+            padding: 15px;
+
+        }
+
+        .layui-tab-content {
+            background-color: white;
+        }
+
+        .layui-row {
+            height: 100%;
+        }
+
+        body {
+            background-color: #F2F2F2;
+        }
+
+        .layui-tab-content {
+            height: 1000px;
+        }
+
+        .layui-table-cell {
+            height: auto !important;
+        }
+
+        .layui-input {
+            width: 95%;
+        }
+
+    </style>
+</head>
+<body>
+<ul class="layui-nav layui-bg-cyan ">
+    <li class="layui-nav-item "><a th:href="@{/index}">景点信息</a></li>
+    <li class="layui-nav-item "><a th:href="@{/addScenic}">景点添加</a></li>
+    <li class="layui-nav-item"><a th:href="@{/pay}">订单信息</a></li>
+    <li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
+    <li class="layui-nav-item layui-this"><a href="">音频列表</a></li>
+</ul>
+<div class="laycontent">
+
+
+
+    <div class="layui-row layui-col-space15">
+
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-tab layui-tab-card">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">音频列表</li>
+                    <li>音频上传</li>
+
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <table id="audioList" lay-filter='topCheck' data-type="reload"></table>
+                    </div>
+                    <div class="layui-tab-item">
+
+                        <!-- <form class="layui-form"> -->
+                        <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">景点名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="scenicName" placeholder="请输入景点名称"
+                                       autocomplete="off" class="layui-input" id="scenicName">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">语音类型</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="audioName" placeholder="请输入语音类型，如:男声普通胡，女声四川话等"
+                                       autocomplete="off" class="layui-input" id="audioName">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">语音价格</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="audioMoney" placeholder="请输入语音单价，单位:元"
+                                       autocomplete="off" class="layui-input" id="audioMoney">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align: right;">音频:</label>
+                            <div class="layui-input-block">
+                                <div class="layui-upload-drag" id="uploadVideo">
+                                    <i class="layui-icon"></i>
+                                    <p>点击上传，或将文件拖拽到此处</p>
+                                    <div class="layui-hide" id="uploadVideoView">
+                                        <hr>
+                                        <img src="" alt="上传成功后渲染" style="max-width: 100%">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="*" id="laybtn">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+
+                        <!-- 	</form> -->
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="Handle_bar">
+    <a class="layui-btn layui-btn-xs" lay-event="update">更新</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+<script type="text/javascript">
+    layui.use(['element', 'jquery', 'table',"upload"], function() {
+        const element = layui.element,
+            $ = layui.jquery,
+            table = layui.table,
+            upload = layui.upload;
+
+        table.render({
+            elem: "#audioList",
+            url: "/getAudio",
+            title: "音频表",
+            page: true,
+            loading: true,
+            cellMinWidth: 120,
+            done: (res) => {
+                $('table').width('100%')
+            },
+            cols: [
+                [
+                    //设置序列号列
+                    {
+                        field: 'aa',
+                        title: '编号',
+                        type: 'numbers'
+                    },
+
+                    {
+                        field: 'audioid',
+                        title: '音频编号',
+                        sort: true,
+                        width: 80,
+                        hide: true
+                    },
+                    {
+                        field: 'scenicId',
+                        title: '景点id',
+                        width: 80,
+
+                    },
+                    {
+                        field: 'scenicName',
+                        title: '景点名称',
+                        width: 100,
+                        align: "left"
+
+                    },
+                    {
+                        field: 'audioName',
+                        title: '音频类型',
+                        align: 'center',
+                        width: 100,
+
+                    },
+                    {
+                        field: 'audioUrl',
+                        title: '音频地址',
+                        width: 80,
+
+
+                    },
+                    {
+                        field: 'audioMoney',
+                        title: '音频价格',
+                        width: 80,
+
+
+                    },
+                    //设置表头工具栏
+                    {
+                    	field: '操作',
+                    	title: "操作",
+                    	toolbar: '#Handle_bar',
+                    	width: 120
+                    }
+                ]
+            ],
+            parseData: (res) => {
+
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.count,
+                    "data": res.data
+                }
+
+            },
+            toolbar: "#toolbar"
+        });
+
+        upload.render({
+            elem: '#uploadVideo',
+            url: '/uploadAudio' //改成您自己的上传接口
+            ,
+            data: {
+
+            },
+            field: 'attachs',
+            accept: 'audio',
+            drag: true,
+            method:"post",
+            // headers: {
+            // 	'Content-Type': 'application/x-www-form-urlencoded'
+            // },
+            auto: false,
+            bindAction: '#laybtn',
+
+            before: function(){
+                this.data.scenicName = $("#scenicName").val(),
+                    this.data.audioName = $("#audioName").val(),
+                    this.data.audioMoney = $("#audioMoney").val()
+
+
+                if ($("#scenicName").val()==""||$("#audioName").val()==""|| $("#audioMoney").val()=="") {
+                    layer.alert("必填项不能为空")
+                    // stopPropagation();
+                }
+                layer.msg('上传中', {
+                    icon: 16,
+                    time: 0
+                });
+            },
+            done: (res) =>{
+                console.log(res);
+                if (res.code != 0) {
+                    layer.msg("上传失败", {
+                        anim: 6
+                    })
+                } else if (res.code == 0) {
+                    layer.msg("上传成功", {
+                        anim: 6
+                    })
+                }
+            },
+            erro:(res)=>{
+                console.log(res)
+            }
+
+        });
+
+        /**
+         * 监听行工具栏事件
+         */
+        table.on('tool(topCheck)', function(obj) {
+            //得到当前操作行的相关信息
+            const tr = obj.data;
+
+            //得到事件名
+            const eventName = obj.event;
+
+
+            //判断事件名,执行对应的方法
+            if (eventName == 'del') {
+                const id = tr.audioid;
+                layer.confirm("您确认要删除吗？", function (index) {
+                    //删除指定tr del()
+                    const promise = new Promise((resolve, reject) => {
+                        $.ajax({
+                            url: '/deleteAudio',
+                            data: {
+                                'id': id
+                            },
+                            async: false,
+                            type: "post",
+                            dataType: "jsonp",
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            success: function (res) {
+                                // 删除成功后刷新页面
+                                window.location.reload();
+                                resolve(res.code);
+                            },
+                            error: function (data) {
+                                reject(data.code)
+                                console.log(data);
+                                // window.location.reload();
+                            },
+                        });
+
+
+                    })
+                    promise.then((value) => {
+                        layer.msg("删除成功")
+
+                    }).catch((value) => {
+                        layer.msg("删除失败")
+                    })
+                    layer.close(index);
+                })
+
+
+            } else if (eventName == 'update') {
+                //输入框
+                const audioid = tr.audioid;
+                const scenicName = tr.scenicName;
+                const audioName = tr.audioName;
+                const audioMoney = tr.audioMoney;
+                const scenicId = tr.scenicId;
+                // const audioUrl = tr.audioUrl;
+                layer.open({
+                    title: ['更新信息', 'font-size:18px;'],
+                    type: 2,
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['650px', '450px'], //宽高
+                    content: '/audioUpdate',
+                    scrollbar: false,
+                    success: function (layero, index) {
+                        const inp4 = $(layero).find("iframe").contents().find("#audioid");
+
+                        inp4.val(audioid);
+                        const inp1 = $(layero).find("iframe").contents().find("#audioName");
+                        inp1.val(audioName);
+                        const inp2 = $(layero).find("iframe").contents().find("#audioMoney");
+                        inp2.val(audioMoney);
+                        const inp3 = $(layero).find("iframe").contents().find("#scenicName");
+                        inp3.val(scenicName);
+                        const inp5 = $(layero).find("iframe").contents().find("#scenicId");
+                        inp5.val(scenicId);
+                    },
+                    btn: ['立即提交', '取消'],
+                    yes: function (index, layero) {
+                        const btn = $(layero).find("iframe").contents().find("#audio");
+
+                        $(layero).find("iframe").contents().find("#audio").click();
+                        // btn.addEventListener("click",()=>{
+                        //
+                        // })
+
+                    }
+                });
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

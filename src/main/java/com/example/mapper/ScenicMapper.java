@@ -60,4 +60,6 @@ public interface ScenicMapper extends BaseMapper<Scenic> {
     List<Scenic> getPage(int start, int num);
 
     int getCount();
+
+    int queryAllByName(String name);
 }

@@ -48,4 +48,6 @@ public interface IScenicService extends IService<Scenic> {
     List<Scenic> searchScenic(String Sname);
 
     List<Scenic> getPage(int start, int num);
+
+    int getInfoByName(String name);
 }

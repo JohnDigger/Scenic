@@ -33,8 +33,9 @@
 		<ul class="layui-nav layui-bg-cyan ">
 			<li class="layui-nav-item layui-this"><a th:href="@{/index}">景点信息</a></li>
 			<li class="layui-nav-item "><a th:href="@{/addScenic}">景点添加</a></li>
-			<li class="layui-nav-item "><a th:href="@{/pay}">订单信息</a></li>
+			<li class="layui-nav-item"><a th:href="@{/pay}">订单信息</a></li>
 			<li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
+			<li class="layui-nav-item "><a th:href="@{/audioList}">音频列表</a></li>
 		</ul>
 		<ul class="layui-nav layui-bg-cyan layui-layout-right">
 			<li class="layui-nav-item layui-hide layui-show-md-inline-block">
@@ -170,7 +171,7 @@
 						field: 'list',
 						title: '简介',
 						sort: true,
-						width: 400,
+						width: 300,
 
 
 					},
@@ -188,6 +189,13 @@
 						templet: '#titlevideo',
 						align:'center',
 						width:100,
+					},
+					{
+						field: 'type',
+						title: '景点类别',
+
+						align:'center',
+
 					},
 					{
 						field: 'text',
