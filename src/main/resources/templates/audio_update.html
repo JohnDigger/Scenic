@@ -83,7 +83,34 @@
         var upload = layui.upload;
         var layer = layui.layer;
 
-
+        // if(! $(".layui-upload-choose")){
+        //     const promise = new Promise((resolve,reject)=>{
+        //         $.ajax({
+        //             data:{
+        //                 "audioid" : $("#audioid").val(),
+        //                 "audioName" : $("#audioName").val(),
+        //                 "audioMoney" : $("#audioMoney").val(),
+        //                 "scenicName": $("#scenicName").val(),
+        //                 "scenicId" : $("#scenicId").val(),
+        //             },url:"/uploadAudio",
+        //             type:"POST",
+        //             dataType:"jsonp",
+        //             async:false,
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded'
+        //             },success:(res)=>{
+        //                 resolve(res.code)
+        //             },error:(res)=>{
+        //                 reject(res.code)
+        //             }
+        //         })
+        //     })
+        //     promise.then((relsove)=>{
+        //         console.log(relsove);
+        //     }).catch((reject)=>{
+        //         console.log(reject);
+        //     })
+        // }
         upload.render({
             elem: '#uploadAudio',
             url: '/uploadAudio' //改成您自己的上传接口

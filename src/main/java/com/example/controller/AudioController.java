@@ -178,7 +178,7 @@ public class AudioController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:8080/audio/"+fileName;
+                url="http://localhost:80/audio/"+fileName;
                 audio.setAudioUrl(url);
                 jsonResult = iAudioService.updateAll(audio);
 
