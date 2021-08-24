@@ -90,8 +90,8 @@ public class ScenicController {
     }
 
     @RequestMapping("/getScenicByType")
-    public List<Scenic> getScenicByType(String type) {
-        return scenicService.getScenicByType(type);
+    public List<Scenic> getScenicByType(String scenicType) {
+        return scenicService.getScenicByType(scenicType);
     }
 
     @RequestMapping("/search")
@@ -148,14 +148,14 @@ public class ScenicController {
 
     @RequestMapping("insertText")
     @ResponseBody
-    public JsonResult textInsert(@RequestParam String name,@RequestParam String list,@RequestParam String text,@RequestParam String type){
+    public JsonResult textInsert(@RequestParam String name,@RequestParam String list,@RequestParam String text,@RequestParam String scenicType){
         System.out.println(name);
         JsonResult jsonResult = new JsonResult();
         Scenic scenic = new Scenic();
         scenic.setName(name);
         scenic.setList(list);
         scenic.setText(text);
-        scenic.setType(type);
+        scenic.setScenicType(scenicType);
         try {
 
             scenicMapper.InsertScenic(scenic);
