@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 80
   servlet:
     context-path: /
     encoding:
@@ -9,9 +9,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncodeing=UTF-8&useSSL=false&serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/scenic_spot?useUnicode=true&characterEncodeing=UTF-8&useSSL=false&serverTimezone=GMT
     username: root
-    password: 123456
+    password: dtt000923
   servlet:
     multipart:
       max-request-size: 100MB
