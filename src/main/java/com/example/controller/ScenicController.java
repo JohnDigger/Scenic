@@ -158,6 +158,7 @@ public class ScenicController {
         scenic.setScenicType(scenicType);
         try {
 
+
             scenicMapper.InsertScenic(scenic);
         }catch (Exception e){
             e.printStackTrace();
