@@ -41,7 +41,7 @@ public interface IScenicService extends IService<Scenic> {
 
     int saveUserMsg(String nickName, String openId);
 
-    List<Scenic> getScenicByType(String type);
+    List<Scenic> getScenicByType(String scenicType);
 
     JsonResult updateVideo(String name,String video_path);
 

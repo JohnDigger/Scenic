@@ -90,8 +90,8 @@ public class ScenicController {
     }
 
     @RequestMapping("/getScenicByType")
-    public List<Scenic> getScenicByType(String type) {
-        return scenicService.getScenicByType(type);
+    public List<Scenic> getScenicByType(String scenicType) {
+        return scenicService.getScenicByType(scenicType);
     }
 
     @RequestMapping("/search")
