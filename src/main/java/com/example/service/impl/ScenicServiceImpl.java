@@ -78,8 +78,8 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     }
 
     @Override
-    public List<Scenic> getScenicByType(String type) {
-        return scenicMapper.getScenicByType(type);
+    public List<Scenic> getScenicByType(String scenicType) {
+        return scenicMapper.getScenicByType(scenicType);
     }
 
     @Override
@@ -87,9 +87,10 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
         return scenicMapper.getPage(start-1,num);
     }
 
-
-
-
+    @Override
+    public int getInfoByName(String name) {
+        return scenicMapper.queryAllByName(name);
+    }
 
 
     @Override

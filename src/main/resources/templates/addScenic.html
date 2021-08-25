@@ -38,6 +38,8 @@
 			<li class="layui-nav-item layui-this"><a th:href="@{/addScenic}">景点添加</a></li>
             <li class="layui-nav-item"><a th:href="@{/pay}">订单信息</a></li>
             <li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
+            <li class="layui-nav-item "><a th:href="@{/audioList}">音频列表</a></li>
+
 		</ul>
         <div class="layui-card">
             <div class="layui-card-body" style="padding-top: 40px;">
@@ -53,7 +55,14 @@
 
                                     </div>
                                 </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i style="color: red;">*</i>景点类别</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" placeholder="请填写入景点的类别" id="type" name="type"
+                                               class="layui-input" lay-verify="required" required />
 
+                                    </div>
+                                </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"><i style="color: red;">*</i>景点简介</label>
                                     <div class="layui-input-block">
@@ -235,9 +244,9 @@
             }
             window.wordLimit = (obj) =>{
 
-                var currleg = $(obj).val().length;
+                const currleg = $(obj).val().length;
 
-                var length = $(obj).attr('maxlength');
+                const length = $(obj).attr('maxlength');
 
                 if (currleg > length) {
 
@@ -255,11 +264,13 @@
 				let formData = data.field;
 				let name = formData.name,
 				list = formData.list,
-				text = formData.text;
+				text = formData.text,
+                type = formData.type;
 
 				window.Tname = name;
 				window.Ttext = text;
 				window.Tlist = list;
+				window.Ttype = type;
                 step.next('#stepForm');
 				
                 return false;
@@ -273,6 +284,7 @@
 						'name': Tname,
 						'list': Tlist,
 						'text': Ttext,
+                        'type':Ttype
 					},
 					async: false,
                     traditional: true,
@@ -282,16 +294,16 @@
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},beforeSend:function(){
 						console.log(Tname);
-						if(Tname == "" || Tlist == "" || Ttext == ""){
+						if(Tname === "" || Tlist === "" || Ttext === "" ){
 							layer.msg("必填信息项为空");
 							return false;
 						}
 					},
 					success:function(rec){
-						var code = rec[0].code;
-						var recive_data = rec[0].data.id
-					
-						if(code==0){
+                        const code = rec[0].code;
+                        const recive_data = rec[0].data.id;
+
+                        if(code==0){
 							var mg = layer.msg("提交成功",{time:5000,anim:6});
 							layer.close(mg);
 					

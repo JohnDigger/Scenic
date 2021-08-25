@@ -90,8 +90,8 @@ public class ScenicController {
     }
 
     @RequestMapping("/getScenicByType")
-    public List<Scenic> getScenicByType(String type) {
-        return scenicService.getScenicByType(type);
+    public List<Scenic> getScenicByType(String scenicType) {
+        return scenicService.getScenicByType(scenicType);
     }
 
     @RequestMapping("/search")
@@ -148,13 +148,14 @@ public class ScenicController {
 
     @RequestMapping("insertText")
     @ResponseBody
-    public JsonResult textInsert(@RequestParam String name,@RequestParam String list,@RequestParam String text){
+    public JsonResult textInsert(@RequestParam String name,@RequestParam String list,@RequestParam String text,@RequestParam String scenicType){
         System.out.println(name);
         JsonResult jsonResult = new JsonResult();
         Scenic scenic = new Scenic();
         scenic.setName(name);
         scenic.setList(list);
         scenic.setText(text);
+        scenic.setScenicType(scenicType);
         try {
 
             scenicMapper.InsertScenic(scenic);
@@ -190,7 +191,8 @@ public class ScenicController {
 //        }
 
         //获取当前工程文件路径
-       String realpath = this.getClass().getResource("/static/upload/").getPath();
+//       String realpath = this.getClass().getResource("/static/upload/").getPath();
+        String realpath = "C:/scenic/picture/";
         //       logger.info("product-------add-----------realPath:" + JSON.toJSON(realpath));
         for (MultipartFile attach : attachs) {
             if (attach.isEmpty()) {
@@ -216,9 +218,9 @@ public class ScenicController {
 //            logger.info("product添加getOriginalFilename:" + JSON.toJSON(attach.getOriginalFilename()));
 //            logger.info("product添加path:" + JSON.toJSON(path));
 //            product.setImg(picName);
-            scenic.setPicturePath("http://localhost:80/upload/"+picName);
+            scenic.setPicturePath("http://localhost:80/picture/"+picName);
 //            productService.addImg(product);
-            scenicMapper.updateByName(name,"http://localhost:80/upload/"+picName);
+            scenicMapper.updateByName(name,"http://localhost:80/picture/"+picName);
             System.out.println(name);
             try {
 
@@ -260,7 +262,7 @@ public class ScenicController {
             fileName = FileNameUtil.getFileName(fileName);
             System.out.print("（加个时间戳，尽量避免文件名称重复）保存的文件名为: "+fileName+"\n");
             //获取当前工程文件路径
-            String realpath = this.getClass().getResource("/static/upload/").getPath();
+            String realpath = "C:/scenic/video/";
             //加个时间戳，尽量避免文件名称重复
             String path = realpath + fileName;
             //String path = "E:/fileUpload/" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
@@ -291,7 +293,7 @@ public class ScenicController {
                 //上传文件
                 file.transferTo(dest); //保存文件
                 System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:80/upload/"+fileName;
+                url="http://localhost:80/video/"+fileName;
                 return scenicService.updateVideo(name,url);
 
             } catch (IOException e) {
@@ -308,71 +310,6 @@ public class ScenicController {
 
         return jsonResult;
     }
-    @RequestMapping(value="/uploadAudio",produces="application/json;charset=UTF-8")
-    @ResponseBody
-    public JsonResult uploadAudio(@RequestParam("attachs") MultipartFile[] files,@Validated @RequestParam(value = "name",required = true) String name) {
-        JsonResult jsonResult = new JsonResult();
-        for (MultipartFile file : files){
-            //判断文件是否为空
-            if (file.isEmpty()) {
-                jsonResult.setCode(1);
-                jsonResult.setMsg("file null");
-                jsonResult.setData("文件为空");
 
-            }
-
-            // 获取文件名
-            String fileName = Objects.requireNonNull(file.getOriginalFilename()).replace(" ","");
-            fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
-            fileName = FileNameUtil.getFileName(fileName);
-            System.out.print("（加个时间戳，尽量避免文件名称重复）保存的文件名为: "+fileName+"\n");
-            //获取当前工程文件路径
-            String realpath = this.getClass().getResource("/static/upload/").getPath();
-            //加个时间戳，尽量避免文件名称重复
-            String path = realpath + fileName;
-            //文件绝对路径
-            System.out.print("保存文件绝对路径"+path+"\n");
-
-            //创建文件路径
-            File dest = new File(path);
-
-            //判断文件是否已经存在
-            if (dest.exists()) {
-                jsonResult.setCode(2);
-                jsonResult.setMsg("File exist");
-                jsonResult.setData("文件已存在");
-                return jsonResult;
-            }
-
-            //判断文件父目录是否存在
-            if (!dest.getParentFile().exists()) {
-                dest.getParentFile().mkdir();
-                jsonResult.setCode(4);
-                jsonResult.setMsg("parent file not exist");
-                jsonResult.setData("父文件不存在");
-            }
-
-            String url;
-            try {
-                //上传文件
-                file.transferTo(dest); //保存文件
-                System.out.print("保存文件路径"+path+"\n");
-                url="http://localhost:80/upload/"+fileName;
-                return scenicService.updateVideo(name,url);
-
-            } catch (IOException e) {
-                jsonResult.setCode(3);
-                jsonResult.setMsg("failed");
-                jsonResult.setData("上传失败");
-
-            }
-
-        }
-
-//        System.out.print("上传的文件名为: "+fileName+"\n");
-
-
-        return jsonResult;
-    }
 
 }

@@ -25,12 +25,11 @@ public class Audio extends Model{
   @Id
   private int audioid;
   private int scenicId;
-  private int boxId;
   private String scenicName;
   private String audioUrl;
   private String audioName;
   private String audioMoney;
-  private String audioNameAndMoney;
+//  private String audioNameAndMoney;
 
 
 

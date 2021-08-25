@@ -140,6 +140,26 @@ public class UserController {
 
         return "layer_update";
     }
+    @RequestMapping("audioList")
+    public String audioList(HttpServletRequest request){
+        //统一拦截（查询当前session是否存在user）(这里user会在每次登陆成功后，写入session)
+        User user=(User)request.getSession().getAttribute("USER");
+        if(user==null){
+            return "login";
+        }
+
+        return "audioList";
+    }
+    @RequestMapping("audioUpdate")
+    public String audioUpdate(HttpServletRequest request){
+        //统一拦截（查询当前session是否存在user）(这里user会在每次登陆成功后，写入session)
+        User user=(User)request.getSession().getAttribute("USER");
+        if(user==null){
+            return "login";
+        }
+
+        return "audio_update";
+    }
 }
 
 
