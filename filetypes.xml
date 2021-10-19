@@ -6,8 +6,10 @@
       <mapping ext="keystore" type="PLAIN_TEXT" />
       <mapping pattern="UserAccountTimeMapper" type="XML" />
       <mapping pattern="ProductMapper" type="XML" />
+      <mapping pattern="TtypeMapper" type="XML" />
       <mapping pattern="AccountMapper" type="XML" />
       <mapping pattern="lompok" type="XML" />
+      <removed_mapping pattern="TtypeMapper.xml" approved="true" type="PLAIN_TEXT" />
       <removed_mapping pattern="application.yml" approved="true" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
