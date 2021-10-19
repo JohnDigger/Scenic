@@ -1,4 +1,5 @@
 package com.example.service.impl;
+
 import com.example.model.*;
 import com.example.mapper.ScenicMapper;
 import com.example.service.IScenicService;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author astupidcoder
@@ -28,11 +29,11 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     @Override
     public Map<Integer, Object> getList() {
         List<Scenic> lis = scenicMapper.getList();
-        Map<Integer,Object> mp = new HashMap<>();
+        Map<Integer, Object> mp = new HashMap<>();
 
-        for (Scenic i:lis){
+        for (Scenic i : lis) {
             Integer id = i.getId();
-            mp.put(id,i);
+            mp.put(id, i);
         }
         return mp;
     }
@@ -54,7 +55,7 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
     @Override
     public int saveUserBuyMsg(Integer audioId, String openId) {
-        return scenicMapper.saveUserBuyMsg(audioId,openId);
+        return scenicMapper.saveUserBuyMsg(audioId, openId);
     }
 
     @Override
@@ -65,8 +66,8 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     @Override
     public int saveUserMsg(String nickName, String openId) {
         TUser tUser1 = scenicMapper.getUserByOpenId(openId);
-        if (tUser1 == null){
-            scenicMapper.saveUserMsg(nickName,openId);
+        if (tUser1 == null) {
+            scenicMapper.saveUserMsg(nickName, openId);
             return 1;
         }
         return 0;
@@ -84,7 +85,7 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
 
     @Override
     public List<Scenic> getPage(int start, int num) {
-        return scenicMapper.getPage(start-1,num);
+        return scenicMapper.getPage(start - 1, num);
     }
 
     @Override
@@ -96,12 +97,12 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     @Override
     public JsonResult updateVideo(String name, String video_path) {
         JsonResult jsonResult = new JsonResult();
-        int updateStatus = scenicMapper.updateVideo_pathInt(name,video_path);
-        if (updateStatus == 0){
+        int updateStatus = scenicMapper.updateVideo_pathInt(name, video_path);
+        if (updateStatus == 0) {
             jsonResult.setCode(0);
             jsonResult.setMsg("上传失败");
             jsonResult.setData("上传失败，请检查是否不存在此景区或者景区名为空");
-        }else if (updateStatus == 1){
+        } else if (updateStatus == 1) {
             jsonResult.setCode(1);
             jsonResult.setMsg("sucess");
             jsonResult.setData("上传成功");
@@ -110,13 +111,12 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     }
 
 
-
     @Override
-    public JsonResult queryMsg(int page,int limit) {
+    public JsonResult queryMsg(int page, int limit) {
         JsonResult jsonResult = new JsonResult();
         jsonResult.setCode(0);
         jsonResult.setMsg("success");
-        jsonResult.setData(scenicMapper.queryMsg(page,limit));
+        jsonResult.setData(scenicMapper.queryMsg(page, limit));
         jsonResult.setCount(scenicMapper.getCount());
         return jsonResult;
     }
@@ -148,7 +148,6 @@ public class ScenicServiceImpl extends ServiceImpl<ScenicMapper, Scenic> impleme
     public int updateMsg(Scenic scenic) {
         return scenicMapper.updateById(scenic);
     }
-
 
 
 }

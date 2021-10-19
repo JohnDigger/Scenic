@@ -5,12 +5,13 @@ import com.example.model.Scenic;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.model.JsonResult;
 import com.example.model.TBuy;
+
 import java.util.List;
 import java.util.Map;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author astupidcoder
@@ -21,7 +22,7 @@ public interface IScenicService extends IService<Scenic> {
 
     List<Scenic> getByIdPlus(Integer id);
 
-    JsonResult queryMsg(int page,int limit);
+    JsonResult queryMsg(int page, int limit);
 
     int insertMsg(Scenic scenic);
 
@@ -43,7 +44,7 @@ public interface IScenicService extends IService<Scenic> {
 
     List<Scenic> getScenicByType(String scenicType);
 
-    JsonResult updateVideo(String name,String video_path);
+    JsonResult updateVideo(String name, String video_path);
 
     List<Scenic> searchScenic(String Sname);
 

@@ -23,20 +23,19 @@ public class UserService implements UserServiceimpl {
         User userMsg = userMapper.findByName(username);
         JsonResult jsonResult = new JsonResult();
         HttpSession session = request.getSession();
-        if (userMsg == null){
+        if (userMsg == null) {
             jsonResult.setCode(2);
             jsonResult.setMsg("user do not exist");
             jsonResult.setData("null");
             return jsonResult;
         }
-        if (userMsg.getPassword().equals(password)){
+        if (userMsg.getPassword().equals(password)) {
             jsonResult.setCode(0);
             jsonResult.setMsg("login success");
             jsonResult.setData(userMsg);
             User user = userMapper.findByName(username);
-            session.setAttribute("USER",user);
-        }
-        else {
+            session.setAttribute("USER", user);
+        } else {
             jsonResult.setCode(1);
             jsonResult.setMsg("login failed");
             jsonResult.setData("null");

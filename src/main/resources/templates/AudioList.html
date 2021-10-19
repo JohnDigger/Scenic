@@ -44,6 +44,17 @@
     <li class="layui-nav-item"><a th:href="@{/pay}">订单信息</a></li>
     <li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
     <li class="layui-nav-item layui-this"><a href="">音频列表</a></li>
+    <li class="layui-nav-item "><a th:href="@{/addScnicType}">景点类型</a></li>
+</ul>
+<ul class="layui-nav layui-bg-cyan layui-layout-right">
+    <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+        <a th:href="@{/loginout}">
+
+            登出
+        </a>
+
+    </li>
+
 </ul>
 <div class="laycontent">
 
@@ -257,7 +268,7 @@
                     })
                 }
             },
-            erro:(res)=>{
+            error:(res)=>{
                 console.log(res)
             }
 

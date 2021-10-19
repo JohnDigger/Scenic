@@ -12,7 +12,8 @@
 
 
 		.layui-body {
-			left: 10px
+			left: 0px;
+			overflow-y:scroll;
 		}
 
 
@@ -36,10 +37,11 @@
 			<li class="layui-nav-item"><a th:href="@{/pay}">订单信息</a></li>
 			<li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
 			<li class="layui-nav-item "><a th:href="@{/audioList}">音频列表</a></li>
+			<li class="layui-nav-item "><a th:href="@{/addScnicType}">景点类型</a></li>
 		</ul>
 		<ul class="layui-nav layui-bg-cyan layui-layout-right">
 			<li class="layui-nav-item layui-hide layui-show-md-inline-block">
-				<a href="javascript:;">
+				<a th:href="@{/loginout}">
 
 					登出
 				</a>
@@ -87,7 +89,8 @@
 
 		</script>
 		<script type="text/html" id="Handle_bar">
-			<a class="layui-btn layui-btn-xs" lay-event="update">更新</a>
+			<a class="layui-btn layui-btn-xs" lay-event="update">更新信息</a>
+			<a class="layui-btn layui-btn-xs" lay-event="updatefile">更新文件</a>
 			<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 		</script>
 	</div>
@@ -147,7 +150,8 @@
 					{
 						field: 'aa',
 						title: '编号',
-						type: 'numbers'
+						type: 'numbers',
+						width: '5%'
 					},
 					// //设置复选框列
 					// {
@@ -158,20 +162,20 @@
 						field: 'id',
 						title: '用户编号',
 						sort: true,
-						width: 80,
+						width: '5%',
 						hide: true
 					},
 					{
 						field: 'name',
 						title: '景点名',
-						width: 100,
+						width: '5%',
 
 					},
 					{
 						field: 'list',
 						title: '简介',
 						sort: true,
-						width: 300,
+						width: '20%',
 
 
 					},
@@ -180,7 +184,7 @@
 						title: '图片路径',
 						templet: '#titleimg',
 						align:'center',
-						width:100,
+						width: '5%',
 
 					},
 					{
@@ -188,19 +192,19 @@
 						title: '视频路径',
 						templet: '#titlevideo',
 						align:'center',
-						width:100,
+						width: '5%',
 					},
 					{
-						field: 'type',
+						field: 'scenicType',
 						title: '景点类别',
 
 						align:'center',
-
+						width: '15%',
 					},
 					{
 						field: 'text',
 						title: '解说词',
-						width: 600,
+						width: '20%',
 
 
 					},
@@ -209,7 +213,7 @@
 						field: '操作',
 						title: "操作",
 						toolbar: '#Handle_bar',
-						width: 120
+						width: '15%',
 					}
 				]
 			],
@@ -217,48 +221,12 @@
 		});
 
 
-		//头监听事件
-		// 语法:
-		// 	table.on('tollbar(demo)',function(obj){
-
-		// 	});
-		// 注:demo表示的是容器上设置的lay-filter属性值
-		// table.on('toolbar(topCheck)', function(obj) {
-		// 	// console.log(obj);
-		// 	//再obj.config对象中可以获取id属性值,即表示当前容器的id属性值,也就是demo
-		// 	//获取当前表格被选中记录对象,返回数据
-		// 	var checkStatus = table.checkStatus(obj.config.id);
-		// 	console.log(checkStatus)
-		// 	//获取事件名
-		// 	var eventName = obj.event;
-		// 	//判断事件名,执行对应的代码
-		// 	switch (eventName) {
-		// 		case "getCheckData":
-		// 			//获取被选中的记录的数组
-		// 			var arr = checkStatus.data;
-		// 			//将数组解析为字符串
-		// 			layer.alert(JSON.stringify(arr));
-		// 			break;
-		// 		case "getCheckLength":
-		// 			var arr = checkStatus.data;
-		// 			layer.alert("选中数据的长度" + arr.length + "条记录");
-		// 			break;
-		// 		case "isAll":
-		// 			//通过isAll属性判断是否全选
-		// 			var flag = checkStatus.isAll;
-		// 			var str = flag ? '全选' : '未全选';
-		// 			layer.msg(str);
-		// 			break;
-		// 		default:
-		// 			break;
-		// 	}
-		// });
-
 		/**
 		 * 监听行工具栏事件
 		 */
 		table.on('tool(topCheck)', function(obj) {
-			//得到当前操作行的相关信息
+			let name;
+//得到当前操作行的相关信息
 			var tr = obj.data;
 
 			//得到事件名
@@ -300,12 +268,13 @@
 			} else if (eventName == 'update') {
 				//输入框
 				var id = tr.id;
-				var name = tr.name;
+				name = tr.name;
 				var list = tr.list;
 				var picturePath = tr.picturePath;
 				var text = tr.text;
+				var scenicType = tr.scenicType;
 				layer.open({
-					title: ['更新景区信息', 'font-size:18px;'],
+					title: ['更新景点信息', 'font-size:18px;'],
 					type: 2,
 					maxmin: true,
 					shadeClose: true,
@@ -313,6 +282,8 @@
 					content: '/update',
 					scrollbar: false,
 					success: function(layero, index) {
+						var inp5 = $(layero).find("iframe").contents().find("#vehicleLog");
+						inp5.val(scenicType);
 						var inp4 = $(layero).find("iframe").contents().find("#layerid");
 
 						inp4.val(id);
@@ -322,11 +293,11 @@
 						inp2.val(list);
 						var inp3 = $(layero).find("iframe").contents().find("#layertext");
 						inp3.val(text);
+
 					},
 					btn: ['立即提交', '取消'],
 					yes: function(index, layero) {
-						$(layero).find("iframe").contents().find("#img").click();
-						$(layero).find("iframe").contents().find("#video").click();
+
 
 						$.ajax({
 							url: '/scenic/updateMsg',
@@ -334,7 +305,8 @@
 								'id':  $(layero).find("iframe").contents().find("#layerid").val(),
 								'list': $(layero).find("iframe").contents().find("#layerlist").val(),
 								'name':  $(layero).find("iframe").contents().find("#layername").val(),
-								'text': $(layero).find("iframe").contents().find("#layertext").val()
+								'text': $(layero).find("iframe").contents().find("#layertext").val(),
+								'scenicType': $(layero).find("iframe").contents().find("#vehicleLog").val(),
 							},
 							async: false,
 							type: "post",
@@ -356,38 +328,30 @@
 				});
 
 
-				// layer.prompt({
-				// 	//表单元素的类型 0 = 文本框  1 = 密码框 2 = 文本域
-				// 	formType: 0,
-				// 	value: tr.username //设置输入框的值
-				// },
-				// console.log(picturePath);
-				// $.ajax({
-				// 	url: 'http://localhost:8080/scenic/updateMsg',
-				// 	data: {
-				// 		'id': id,
-				// 		'name': name,
-				// 		'list': list,
-				// 		'picturePath': picturePath,
-				// 		'audioPath': audioPath,
-				// 	},
-				// 	async: false,
-				// 	type: "post",
-				// 	dataType: "jsonp",
-				// 	headers: {
-				// 		'Content-Type': 'application/json'
-				// 	},
+			}else if(eventName == "updatefile"){
+				let name = tr.name;
+				layer.open({
+					title: ['更新景点文件', 'font-size:18px;'],
+					type: 2,
+					maxmin: true,
+					shadeClose: true,
+					area: ['650px', '450px'], //宽高
+					content: '/updateScenicFile',
+					scrollbar: false,
+					success: function(layero, index) {
 
-				// });
-				// function(value, index) {
-				// 	//修改指定单元格的值
-				// 	//value表示修改后的值
-				// 	obj.update({
-				// 		name: value
-				// 	});
-				//关闭弹出层
-				// layer.close(index)
-				// });
+						var inp1 = $(layero).find("iframe").contents().find("#layername");
+						inp1.val(name);
+
+					},
+					btn: ['立即提交', '取消'],
+					yes: function(index, layero) {
+						$(layero).find("iframe").contents().find("#img").click();
+						$(layero).find("iframe").contents().find("#video").click();
+
+					}
+				});
+
 			}
 		});
 		/**

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>header</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui-v2.6.8/layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<ul class="layui-nav layui-bg-cyan ">
+    <li class="layui-nav-item "><a th:href="@{/index}" target="_parent">景点信息</a></li>
+    <li class="layui-nav-item "><a th:href="@{/addScenic} " target="_parent">景点添加</a></li>
+    <li class="layui-nav-item"><a th:href="@{/pay}" target="_parent">订单信息</a></li>
+    <li class="layui-nav-item "><a th:href="@{/purchas}" target="_parent">购买信息</a></li>
+    <li class="layui-nav-item "><a th:href="@{/audioList}" target="_parent">音频列表</a></li>
+    <li class="layui-nav-item layui-this"><a th:href="@{/addScnicType}" >景点类型</a></li>
+</ul>
+<ul class="layui-nav layui-bg-cyan layui-layout-right">
+    <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+        <a th:href="@{/loginout}">
+            登出
+        </a>
+
+    </li>
+
+</ul>
+
+
+<script src="layui-v2.6.8/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+
+
+
+</body>
+</html>

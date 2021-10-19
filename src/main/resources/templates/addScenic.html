@@ -5,9 +5,9 @@
     <title>景点添加</title>
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link href="layui-v2.6.8/layui/css/layui.css" rel="stylesheet"/>
-    <link href="step-lay/step.css" rel="stylesheet">
+    <link href="step/step-lay/step.css">
     <style type="text/css">
         .layui-input-block {
 
@@ -39,8 +39,18 @@
             <li class="layui-nav-item"><a th:href="@{/pay}">订单信息</a></li>
             <li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
             <li class="layui-nav-item "><a th:href="@{/audioList}">音频列表</a></li>
+            <li class="layui-nav-item "><a th:href="@{/addScnicType}">景点类型</a></li>
 
 		</ul>
+        <ul class="layui-nav layui-bg-cyan layui-layout-right">
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                <a th:href="@{/loginout}">
+                    登出
+                </a>
+
+            </li>
+
+        </ul>
         <div class="layui-card">
             <div class="layui-card-body" style="padding-top: 40px;">
                 <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto;">
@@ -58,8 +68,12 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"><i style="color: red;">*</i>景点类别</label>
                                     <div class="layui-input-block">
-                                        <input type="text" placeholder="请填写入景点的类别" id="type" name="type"
-                                               class="layui-input" lay-verify="required" required />
+<!--                                        <input type="text" placeholder="请填写入景点的类别" id="scenicType" name="scenicType"-->
+<!--                                               class="layui-input" lay-verify="required" required />-->
+                                        <select name="scenicType" id="vehicleLog" lay-verify="required">
+                                            <option>请选择类型</option>
+
+                                        </select>
 
                                     </div>
                                 </div>
@@ -104,7 +118,7 @@
                                 </div>
                             </form>
                         </div>
-						
+
                         <div>
                             <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
                                 <div class="layui-form-item">
@@ -113,7 +127,7 @@
                                         <div class="layui-form-mid layui-word-aux">639537</div>
                                     </div> -->
 									<div class="layui-input-block">
-									
+
 										<div class="layui-upload">
 											<button type="button" class="layui-btn" id="uploadImg">上传图片</button>
 											<button type="button" class="layui-btn" style="display: none;" id = "img">开始上传</button>
@@ -128,7 +142,7 @@
 												</div>
 											</div>
 										</div>
-									
+
 										<a name="list-progress"> </a>
 									</div>
                                 </div>
@@ -146,7 +160,7 @@
 										<button type="button" class="layui-btn" style="display: none;" id = "video">开始上传</button>
                                     </div>
                                 </div>
-                                
+
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
                                         <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
@@ -185,10 +199,12 @@
         </div>
     </div>
     <script src="layui-v2.6.8/layui/layui.js"></script>
-    <script src="step-lay/step.js"></script>
+    <script src="step/step-lay/step.js"></script>
+
+
     <script>
         layui.config({
-            base:'step-lay/'
+            base:'step/step-lay/'
         }).use([ 'form', 'step','jquery','upload','element'], function () {
             var $ = layui.$
                 , form = layui.form
@@ -210,6 +226,28 @@
                     title: '完成'
                 }]
             });
+            window.onload = SearchVehicleTag();//加载页面时自动执行方法
+            function SearchVehicleTag(){
+                $.ajax({
+                    url: "/queryAllType",
+                    type: "get",
+                    dataType: "json",
+                    contentType: "application/json",
+                    traditional: true,
+                    success: function (data) {
+                        console.log(data)
+                        for (var i = 0; i < data.data.length; i++) {
+                            var jsonObj =data.data[i];
+                            $("#vehicleLog").append("<option value='"+jsonObj['scenicType']+"'>" + jsonObj['scenicType'] + "</option>");
+
+                        }
+                        form.render('select')
+                    },
+                    error: function (msg) {
+                        alert("数据加载出错，请重试！");
+                    }
+                });
+            }
 
             window.titleLeg = (obj) =>{
 
@@ -259,32 +297,32 @@
                 }
 
             }
-			
+
             form.on('submit(formStep)', function (data) {
 				let formData = data.field;
 				let name = formData.name,
 				list = formData.list,
 				text = formData.text,
-                type = formData.type;
+                scenicType = formData.scenicType;
 
 				window.Tname = name;
 				window.Ttext = text;
 				window.Tlist = list;
-				window.Ttype = type;
+				window.TscenicType = scenicType;
                 step.next('#stepForm');
-				
+
                 return false;
             });
-			
+
             form.on('submit(formStep2)', function (data) {
-				
+
 				$.ajax({
 					url: 'scenic/insertText',
 					data: {
 						'name': Tname,
 						'list': Tlist,
 						'text': Ttext,
-                        'type':Ttype
+                        'scenicType':TscenicType
 					},
 					async: false,
                     traditional: true,
@@ -306,14 +344,14 @@
                         if(code==0){
 							var mg = layer.msg("提交成功",{time:5000,anim:6});
 							layer.close(mg);
-					
+
 						}else if(code == 5){
 							layer.msg("景区名重复");
 						};
 					},
 				});
-				
-			
+
+
                 step.next('#stepForm');
                 return false;
             });
@@ -353,24 +391,24 @@
                 }
             });
 
-			
+
 			var uploadInst = upload.render({
 				elem: '#uploadImg',
 				url: 'scenic/addInfo' //改成您自己的上传接口
 					,
 				data: {
-			
+
 				},
 				field: 'attachs',
 				auto:false,
 				bindAction:'#img',
 				time:5000,
 				choose: function(obj) {
-			
+
 					obj.preview(function(index, file, result) {
 						$('#imgUpload').attr('src', result); //图片链接（base64）
 					});
-					
+
 					element.progress('progressbar', '0%'); //进度条复位
 				},before:function(obj){
 					this.data.name = Tname;
@@ -393,7 +431,7 @@
 					};
 					//上传成功的一些操作
 					//……
-			
+
 					$('#uploadText').html(''); //置空上传失败的状态
 					if (res.code == 0) {
 						layer.msg(res.msg, {
@@ -423,13 +461,13 @@
 					}
 				}
 			});
-			
+
 			 upload.render({
 				elem: '#uploadVideo',
 				url: 'scenic/uploadVideo' //改成您自己的上传接口
 					,
 				data: {
-			
+
 				},
 				field: 'attachs',
 				accept: 'video',
@@ -444,7 +482,7 @@
 				},
 				before: function() {
 					this.data.name = Tname;
-			
+
 					if (!Tname) {
 						layer.alert("景区名称不能为空")
 						stopPropagation();

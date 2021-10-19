@@ -6,9 +6,9 @@ import java.util.List;
 
 
 /**
-*
-*/
-public interface TBuyService  {
+ *
+ */
+public interface TBuyService {
 
 
     List<TBuy> getScenicBuyCount(String startTime, String endTime);
@@ -25,7 +25,7 @@ public interface TBuyService  {
 
     int getScenicCount();
 
-    List<TBuy> getOrder(int page,int limit);
+    List<TBuy> getOrder(int page, int limit);
 
     int getOderNum();
 

@@ -6,13 +6,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class ApplicationConfig extends WebMvcConfigurerAdapter {
-    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-        registry.addResourceHandler("/picture/**").addResourceLocations("file:C:/scenic/picture/");
-        registry.addResourceHandler("/audio/**").addResourceLocations("file:C:/scenic/audio/");
-        registry.addResourceHandler("/video/**").addResourceLocations("file:C:/scenic/video/");
-//        registry.addResourceHandler("/text/**").addResourceLocations("file:C:/scenic/text/");
-//        registry.addResourceHandler("/list/**").addResourceLocations("file:C:/scenic/list/");
+        registry.addResourceHandler(new String[] { "/picture/**" }).addResourceLocations(new String[] { "file:C:/scenic/picture/" });
+        registry.addResourceHandler(new String[] { "/audio/**" }).addResourceLocations(new String[] { "file:C:/scenic/audio/" });
+        registry.addResourceHandler(new String[] { "/video/**" }).addResourceLocations(new String[] { "file:C:/scenic/video/" });
     }
 }
