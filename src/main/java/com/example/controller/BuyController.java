@@ -26,6 +26,7 @@ public class BuyController {
         return this.service.getSevenCount();
     }
 
+
     @RequestMapping({"getYearCount"})
     public JsonResult getYearCount(@RequestParam(value = "year", required = true) String year) {
         System.out.println(year);
