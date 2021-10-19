@@ -21,13 +21,13 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @Entity
-@Table(name="t_user")
-public class TUser extends Model{
+@Table(name = "t_user")
+public class TUser extends Model {
 
-  @Id
-  private int userId;
-  private String nickName;
-  private String openId;
-  private Date date;
+    @Id
+    private int userId;
+    private String nickName;
+    private String openId;
+    private Date date;
 
 }

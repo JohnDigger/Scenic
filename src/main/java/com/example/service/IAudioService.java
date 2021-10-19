@@ -9,7 +9,9 @@ import com.example.model.JsonResult;
  */
 public interface IAudioService {
     int insertAudio(Audio audio);
-    JsonResult getAll(int page,int limit);
+
+    JsonResult getAll(int page, int limit);
+
     JsonResult deleteById(int id);
 
     JsonResult updateAll(Audio audio);

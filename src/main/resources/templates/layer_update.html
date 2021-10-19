@@ -27,6 +27,16 @@
             </td>
         </tr>
         <tr>
+            <td class="item">类型</td>
+            <td>
+                <select name="scenicType" id="vehicleLog" lay-verify="required">
+                    <option>请选择类型</option>
+
+                </select>
+
+            </td>
+        </tr>
+        <tr>
             <td class="item">简介</td>
             <td>
                 <textarea placeholder="请输入内容" name="layerlist" class="layui-textarea" id="layerlist"></textarea>
@@ -40,55 +50,49 @@
 
             </td>
         </tr>
-        <tr>
-            <td class="item">类型</td>
-            <td>
-                <input id="layertype" class="layui-input" name="layertype" style="width:250px;">
 
-            </td>
-        </tr>
-        <tr>
+<!--        <tr>-->
 
-            <td>图片:</td>
+<!--            <td>图片:</td>-->
 
 
-            <td>
-                <div class="layui-upload">
-                    <button type="button" class="layui-btn" id="uploadImg">上传图片</button>
-                    <button type="button" class="layui-btn" style="display: none;" id="img">开始上传</button>
-                    <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="imgUpload" width="100px" height="80px">
-                        <p id="uploadText"></p>
-                    </div>
-                    <div style="width: 95px;">
-                        <div class="layui-progress layui-progress-big" lay-showpercent="yes"
-                             lay-filter="progressbar">
-                            <div class="layui-progress-bar" lay-percent=""></div>
-                        </div>
-                    </div>
-                </div>
+<!--            <td>-->
+<!--                <div class="layui-upload">-->
+<!--                    <button type="button" class="layui-btn" id="uploadImg">上传图片</button>-->
+<!--                    <button type="button" class="layui-btn" style="display: none;" id="img">开始上传</button>-->
+<!--                    <div class="layui-upload-list">-->
+<!--                        <img class="layui-upload-img" id="imgUpload" width="100px" height="80px">-->
+<!--                        <p id="uploadText"></p>-->
+<!--                    </div>-->
+<!--                    <div style="width: 95px;">-->
+<!--                        <div class="layui-progress layui-progress-big" lay-showpercent="yes"-->
+<!--                             lay-filter="progressbar">-->
+<!--                            <div class="layui-progress-bar" lay-percent=""></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <a name="list-progress"> </a>
+<!--                <a name="list-progress"> </a>-->
 
-            </td>
-        </tr>
+<!--            </td>-->
+<!--        </tr>-->
 
-        <tr>
-            <td>视频:</td>
-            <td>
-                <div class="layui-upload-drag" id="uploadVideo">
-                    <i class="layui-icon"></i>
-                    <p>点击上传，或将文件拖拽到此处</p>
-                    <div class="layui-hide" id="uploadVideoView">
-                        <hr>
-                        <img src="" alt="上传成功后渲染" style="max-width: 100%">
-                    </div>
-                </div>
-                <button type="button" class="layui-btn" style="display: none;" id="video">开始上传</button>
+<!--        <tr>-->
+<!--            <td>视频:</td>-->
+<!--            <td>-->
+<!--                <div class="layui-upload-drag" id="uploadVideo">-->
+<!--                    <i class="layui-icon"></i>-->
+<!--                    <p>点击上传，或将文件拖拽到此处</p>-->
+<!--                    <div class="layui-hide" id="uploadVideoView">-->
+<!--                        <hr>-->
+<!--                        <img src="" alt="上传成功后渲染" style="max-width: 100%">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <button type="button" class="layui-btn" style="display: none;" id="video">开始上传</button>-->
 
 
-            </td>
-        </tr>
+<!--            </td>-->
+<!--        </tr>-->
 
     </table>
     <!-- <div class="layui-form-item">
@@ -100,12 +104,38 @@
     </div> -->
 </form>
 <script type="text/javascript">
-    layui.use(['element', 'table', 'jquery', 'layer', 'upload'], function() {
+    layui.use(['element', 'table', 'jquery', 'layer', 'upload','form'], function() {
         var element = layui.element;
         var table = layui.table;
         var $ = layui.jquery;
         var upload = layui.upload;
         var layer = layui.layer;
+        var form = layui.form;
+
+
+        window.onload = SearchVehicleTag();//加载页面时自动执行方法
+        function SearchVehicleTag(){
+            $.ajax({
+                url: "/queryAllType",
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                traditional: true,
+                success: function (data) {
+                    console.log(data)
+                    for (var i = 0; i < data.data.length; i++) {
+                        var jsonObj =data.data[i];
+                        $("#vehicleLog").append("<option value='"+jsonObj['scenicType']+"'>" + jsonObj['scenicType'] + "</option>");
+
+                    }
+                    table.render('select')
+                    form.render('select')
+                },
+                error: function (msg) {
+                    alert("数据加载出错，请重试！");
+                }
+            });
+        }
 
 
         var uploadInst = upload.render({

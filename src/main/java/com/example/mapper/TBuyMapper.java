@@ -1,14 +1,11 @@
 package com.example.mapper;
 
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.model.TBuy;
-
 import java.util.List;
 
-/**
-* @Entity generator.domain.TBuy
-*/
 public interface TBuyMapper extends BaseMapper<TBuy> {
 
     List<TBuy> getScenicBuyCount(String startTime, String endTime);

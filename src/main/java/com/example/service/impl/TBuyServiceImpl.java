@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
-*
-*/
+ *
+ */
 @Service
-public class TBuyServiceImpl implements TBuyService{
+public class TBuyServiceImpl implements TBuyService {
 
     @Autowired(required = false)
     TBuyMapper tBuyMapper;
 
     @Override
     public List<TBuy> getScenicBuyCount(String startTime, String endTime) {
-        return tBuyMapper.getScenicBuyCount(startTime,endTime);
+        return tBuyMapper.getScenicBuyCount(startTime, endTime);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class TBuyServiceImpl implements TBuyService{
 
     @Override
     public List<TBuy> getOrder(int page, int limit) {
-        return tBuyMapper.getAll(page,limit);
+        return tBuyMapper.getAll(page, limit);
     }
 
     @Override

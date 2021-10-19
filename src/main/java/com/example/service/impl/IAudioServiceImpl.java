@@ -24,11 +24,11 @@ public class IAudioServiceImpl implements IAudioService {
     }
 
     @Override
-    public JsonResult getAll(int page,int limit) {
+    public JsonResult getAll(int page, int limit) {
         JsonResult jsonResult = new JsonResult();
         jsonResult.setCode(0);
         jsonResult.setMsg("success");
-        jsonResult.setData(audioMapper.getAllAudio(page,limit));
+        jsonResult.setData(audioMapper.getAllAudio(page, limit));
         jsonResult.setCount(audioMapper.countAll());
         return jsonResult;
     }

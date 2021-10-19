@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>订单信息</title>
+    <link rel="stylesheet" type="text/css" href="layui-v2.6.8/layui/css/layui.css" />
+    <script src="layui-v2.6.8/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        .layui-content {
+            padding: 15px;
+        }
+
+        .layui-tab-content {
+            height: 1000px;
+            background-color: white;
+        }
+
+
+        .layui-row {
+            height: 100%;
+        }
+
+        #header {
+            height: 55px;
+            width: 100%;
+            margin: 0 auto;
+            background: black;
+            margin-bottom: 0px;
+        }
+
+        body {
+            background-color: #F2F2F2;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+
+
+    <div id="header">
+        <iframe MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no th:src='@{/header}'
+                height='auto' width="100%"></iframe>
+    </div>
+
+    <div class="layui-content">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                <div class="layui-tab layui-tab-card">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">音频列表</li>
+
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">景点类型</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="scenicName" placeholder="请输入景点类型"
+                                           autocomplete="off" class="layui-input" id="scenicType">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="*"
+                                            id="laybtn">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //导航依赖于element模块
+    layui.use(['element', 'table'], function() {
+        var element = layui.element;
+        var table = layui.table;
+        var $ = layui.jquery;
+
+        /**
+         * 给指定元素绑定事件
+         */
+        $(document).on('click', '#laybtn', function() {
+            //获取搜索文本框的值
+            var type = document.getElementById("scenicType").value;
+
+            $.ajax({
+                url: '/addType',
+                data: {
+
+                    'type': type,
+                },
+                type: "post",
+                dataType: "jsonp",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                success: function() {
+                    // 删除成功后刷新页面
+                    alert("上传成功")
+                },
+                error: function(data) {
+
+                    alert("上传失败")
+                    // window.location.reload();
+                },
+            })
+        });
+
+    });
+    // });
+</script>
+</body>
+</html>

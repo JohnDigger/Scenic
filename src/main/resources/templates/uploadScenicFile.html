@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+     @author 贾佳
+     @541554971@qq.com
+     -->
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="layui-v2.6.8/layui/css/layui.css" />
+    <script src="layui-v2.6.8/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<form class="layui-form" lay-filter="component-form-group" id="submits" onsubmit="return false">
+    <table id="data" class="layui-table">
+
+        <tr>
+            <td class="item">景点名</td>
+            <td>
+                <input id="layername" class="layui-input" name="layername" readonly style="width:250px;">
+            </td>
+        </tr>
+
+
+        <tr>
+
+            <td>图片:</td>
+
+
+            <td>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="uploadImg">上传图片</button>
+                    <button type="button" class="layui-btn" style="display: none;" id="img">开始上传</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="imgUpload" width="100px" height="80px">
+                        <p id="uploadText"></p>
+                    </div>
+                    <div style="width: 95px;">
+                        <div class="layui-progress layui-progress-big" lay-showpercent="yes"
+                             lay-filter="progressbar">
+                            <div class="layui-progress-bar" lay-percent=""></div>
+                        </div>
+                    </div>
+                </div>
+
+                <a name="list-progress"> </a>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>视频:</td>
+            <td>
+                <div class="layui-upload-drag" id="uploadVideo">
+                    <i class="layui-icon"></i>
+                    <p>点击上传，或将文件拖拽到此处</p>
+                    <div class="layui-hide" id="uploadVideoView">
+                        <hr>
+                        <img src="" alt="上传成功后渲染" style="max-width: 100%">
+                    </div>
+                </div>
+                <button type="button" class="layui-btn" style="display: none;" id="video">开始上传</button>
+
+
+            </td>
+        </tr>
+
+    </table>
+    <!-- <div class="layui-form-item">
+        <div class="layui-input-block">
+            <div class="layui-footer" align="center">
+                <button class="layui-btn" lay-submit="" lay-filter="feedback_submit" style="">立即提交</button>
+            </div>
+        </div>
+    </div> -->
+</form>
+<script type="text/javascript">
+    layui.use(['element', 'table', 'jquery', 'layer', 'upload'], function() {
+        var element = layui.element;
+        var table = layui.table;
+        var $ = layui.jquery;
+        var upload = layui.upload;
+        var layer = layui.layer;
+
+
+        var uploadInst = upload.render({
+            elem: '#uploadImg',
+            url: '/scenic/addInfo' //改成您自己的上传接口
+            ,
+            data: {
+
+            },
+            field: 'attachs',
+            auto: false,
+            bindAction: '#img',
+            time: 5000,
+            choose: function(obj) {
+
+                obj.preview(function(index, file, result) {
+                    $('#imgUpload').attr('src', result); //图片链接（base64）
+                });
+
+                element.progress('progressbar', '0%'); //进度条复位
+            },
+            before: function(obj) {
+                this.data.name = $("#layername").val();
+                //预读本地文件示例，不支持ie8
+                if (!$("#layername").val()) {
+                    layer.alert("景区名称不能为空")
+                    stopPropagation();
+                }
+                element.progress('progressbar', '0%'); //进度条复位
+                layer.msg('上传中', {
+                    icon: 16,
+                    time: 0
+                });
+            },
+            done: function(res) {
+                // console.log(res);
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                };
+                //上传成功的一些操作
+                //……
+
+                $('#uploadText').html(''); //置空上传失败的状态
+                if (res.code == 0) {
+                    layer.msg(res.msg, {
+                        anim: 6,
+                        icon: 4
+                    });
+                };
+            },
+            error: function() {
+                //演示失败状态，并实现重传
+                var uploadText = $('#uploadText');
+                uploadText.html(
+                    '<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs retry-reload">重试</a>'
+                );
+                uploadText.find('.retry-reload').on('click', function() {
+                    uploadInst.upload();
+                });
+            }
+            //进度条
+            ,
+            progress: function(n, elem, e) {
+                element.progress('progressbar', n + '%'); //可配合 layui 进度条元素使用
+                if (n == 100) {
+                    layer.msg('上传完毕', {
+                        icon: 1
+                    });
+                }
+            }
+        });
+        // upload.render({
+        //     elem:'#uploadVideo',
+        //     url: '/scenic/uploadVideo',
+        //     field:'attachs',
+        //     accept: 'video',
+        //     drag: true,
+        //     auto: false,
+        //     bindAction: '#video',
+        //     before: function() {
+        //         this.data.name = $("#layername").val();
+        //
+        //         if (!$("#layername").val()) {
+        //             layer.alert("景区名称不能为空")
+        //             stopPropagation();
+        //         }
+        //         layer.msg('上传中', {
+        //             icon: 16,
+        //             time: 0
+        //         });
+        //     }
+        // })
+        upload.render({
+            elem: '#uploadVideo',
+            url: '/scenic/uploadVideo' //改成您自己的上传接口
+            ,
+            data: {
+
+            },
+            field: 'attachs',
+            accept: 'video',
+            drag: true,
+            auto: false,
+            bindAction: '#video',
+
+            before: function() {
+                this.data.name = $("#layername").val();
+
+                if (!$("#layername").val()) {
+                    layer.alert("景区名称不能为空")
+                    stopPropagation();
+                }
+                layer.msg('上传中', {
+                    icon: 16,
+                    time: 0
+                });
+            },
+            done: function(res) {
+                console.log(res);
+                if (res.code != 1) {
+                    layer.msg("上传失败", {
+                        anim: 6
+                    })
+                } else if (res.code == 1) {
+                    layer.msg("上传成功", {
+                        anim: 6
+                    })
+                }
+            }
+        });
+    })
+</script>
+</body>
+</html>

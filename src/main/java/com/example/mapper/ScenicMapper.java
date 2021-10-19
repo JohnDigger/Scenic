@@ -5,17 +5,9 @@ import com.example.model.Audio;
 import com.example.model.Scenic;
 import com.example.model.TBuy;
 import com.example.model.TUser;
-import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author astupidcoder
- * @since 2021-04-01
- */
 @Mapper
 public interface ScenicMapper extends BaseMapper<Scenic> {
 

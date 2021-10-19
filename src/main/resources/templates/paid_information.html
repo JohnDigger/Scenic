@@ -23,6 +23,7 @@
 					<li class="layui-nav-item layui-this"><a th:href="@{/pay}">订单信息</a></li>
 					<li class="layui-nav-item "><a th:href="@{/purchas}">购买信息</a></li>
 					<li class="layui-nav-item "><a th:href="@{/audioList}">音频列表</a></li>
+					<li class="layui-nav-item "><a th:href="@{/addScnicType}">景点类型</a></li>
 				</ul>
 				<ul class="layui-nav layui-bg-cyan layui-layout-right">
 					<li class="layui-nav-item layui-hide layui-show-md-inline-block">
@@ -36,7 +37,9 @@
 				</ul>
 			</div>
 			<div class="layui-body">
-				<h1>景点后台首页</h1>
+				<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+					<legend>用户支付信息</legend>
+				</fieldset>
 				<div class="demoTable">
 					搜索景点
 					<div class="layui-inline">
@@ -72,59 +75,61 @@
 							{
 								field: 'aa',
 								title:'编号',
-								type: 'numbers'
+								type: 'numbers',
+								width: "10%"
 							},
 							
 							{
 								field: 'buyId',
 								title: '订单id',
 								sort: true,
-								width: 80,
-								hide: true
+								width: "10%",
+								// hide: true
 							},
 							{
 								field: 'userId',
 								title: '用户id',
-								width: 80,
-								hide: true
+								width: "10%",
+								// hide: true
 							},
 							{
 								field: 'nickName',
 								title: '用户昵称',
-								width: 80,
+								width: "10%"
 								
 							},
 							{
 								field: 'scenicId',
 								title: '景区id',
-								width: 80,
-								hide:true
+								width: "5%",
+								// hide:true
 							},
 							{
 								field: 'scenicName',
 								title: '景区名称',
-								width:360
+								width: "10%"
 							},
 							{
 								field: 'audioId',
 								title: '音频id',
-								hide:true,
-								
+								// hide:true,
+								width: "5%"
 							},
 							{
 								field: 'audioName',
 								title: '音频类型',
-								width:280
+								width: "10%"
 							},
 							{
 								field: 'audioMoney',
 								title: '音频价格',
-								width:260
+								width: "10%"
 							},
 							{
 								field: 'buyTime',
 								title: '购买时间',
-								width:480
+								width: "20%",
+								align: 'center'
 							},
 		
 						]

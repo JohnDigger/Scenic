@@ -20,19 +20,19 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @Entity
-@Table(name="t_buy")
-public class TBuy extends Model{
+@Table(name = "t_buy")
+public class TBuy extends Model {
 
-  @Id
-  private int buyId;
-  private int scenicId;
-  private String scenicName;
-  private int userId;
-  private String nickName;
-  private int audioId;
-  private String audioName;
-  private float audioMoney;
-  private String buyTime;
-  @TableField(value = "buy_count", exist = false)
-  private int buyCount;
+    @Id
+    private int buyId;
+    private int scenicId;
+    private String scenicName;
+    private int userId;
+    private String nickName;
+    private int audioId;
+    private String audioName;
+    private float audioMoney;
+    private String buyTime;
+    @TableField(value = "buy_count", exist = false)
+    private int buyCount;
 }
