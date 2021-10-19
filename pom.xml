@@ -95,11 +95,63 @@
     </dependencies>
 
     <build>
+
+<!--            <resources>-->
+
+<!--                <resource>-->
+<!--                    &lt;!&ndash; 防止JKS被maven错误解析 &ndash;&gt;-->
+<!--                    <directory>src/main/resources</directory>-->
+<!--                    <filtering>false</filtering>-->
+<!--                </resource>-->
+
+<!--                <resource>-->
+<!--                    <directory>src/main/resources-filtered</directory>-->
+<!--                    <includes>-->
+<!--                        <include>**/*.p12</include>-->
+<!--                    </includes>-->
+<!--                    <filtering>true</filtering>-->
+<!--                </resource>-->
+
+<!--                <resource>-->
+<!--                    <directory>src/main/resources</directory>-->
+<!--                    <filtering>true</filtering>-->
+<!--                    <excludes>-->
+<!--                        <exclude>**/*.pfx</exclude>-->
+<!--                    </excludes>-->
+<!--                </resource>-->
+
+<!--                <resource>-->
+<!--                    <directory>src/main/resources</directory>-->
+<!--                    <filtering>false</filtering>-->
+<!--                    <includes>-->
+<!--                        <include>**/*.pfx</include>-->
+<!--                    </includes>-->
+<!--                </resource>-->
+<!--            </resources>-->
+
         <plugins>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-resources-plugin</artifactId>-->
+<!--                <configuration><encoding>UTF-8</encoding>-->
+<!--                    &lt;!&ndash; 过滤后缀为pem、pfx的证书文件 &ndash;&gt;-->
+<!--                    <nonFilteredFileExtensions>-->
+<!--                        <nonFilteredFileExtension>cer</nonFilteredFileExtension>-->
+<!--                        <nonFilteredFileExtension>pem</nonFilteredFileExtension>-->
+<!--                        <nonFilteredFileExtension>pfx</nonFilteredFileExtension>-->
+<!--                        <nonFilteredFileExtension>pkcs12</nonFilteredFileExtension>-->
+<!--                        <nonFilteredFileExtension>p12</nonFilteredFileExtension>-->
+<!--                        <nonFilteredFileExtension>jks</nonFilteredFileExtension>-->
+<!--                    </nonFilteredFileExtensions>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
         </plugins>
     </build>
 
