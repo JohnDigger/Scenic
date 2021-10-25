@@ -7,11 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link href="layui-v2.6.8/layui/css/layui.css" rel="stylesheet"/>
+    <link href="kindeditor/themes/default/default.css">
+    <link href="kindeditor/plugins/code/prettify.css">
+    <script src="kindeditor/kindeditor-all.js"></script>
+    <script src="kindeditor/lang/zh-CN.js"></script>
     <link href="step/step-lay/step.css">
     <style type="text/css">
         .layui-input-block {
 
             position: relative;
+
+        }
+        .ke-container.ke-container-default{
+            width:350px!important;
 
         }
 
@@ -82,9 +90,13 @@
                                     <div class="layui-input-block">
                                         <!-- <textarea placeholder="请输入景点简介" value="" id="list" name="list"
                                             class="layui-textarea" lay-verify="required" required></textarea> -->
+<!--                                        <textarea placeholder="请输入景点简介" oninput="wordLeg(this);" maxlength="800"-->
+<!--                                                  onpropertychange="if(value.length>800) value=value.substr(0,800)"-->
+<!--                                                  name="list" class="layui-textarea" id="list" lay-verify="required"-->
+<!--                                                  required></textarea>-->
                                         <textarea placeholder="请输入景点简介" oninput="wordLeg(this);" maxlength="800"
                                                   onpropertychange="if(value.length>800) value=value.substr(0,800)"
-                                                  name="list" class="layui-textarea" id="list" lay-verify="required"
+                                                  name="content" class="layui-textarea " id="list" lay-verify="required"
                                                   required></textarea>
 
                                         <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span
@@ -182,7 +194,7 @@
                             </div>
                             <div style="text-align: center;margin-top: 50px;">
                                 <button class="layui-btn next">再添加一个</button>
-                                <button class="layui-btn layui-btn-primary">查看景点</button>
+                                <button class="layui-btn layui-btn-primary" th:href="@{/index}">查看景点</button>
                             </div>
                         </div>
                     </div>
@@ -192,8 +204,7 @@
                     <h3>说明</h3><br>
                     <h4>请不要重复提交景点，如若在点击提交后还存在有问题需要修改的，请到主页出进行数据更新</h4>
                     <p>请确保数据准确无误后提交</p>
-                    <!-- <br><h4>入款到现金</h4>
-                    <p>如果需要，这里可以放一些关于产品的常见问题说明。</p> -->
+
                 </div>
             </div>
         </div>
@@ -203,6 +214,43 @@
 
 
     <script>
+        let editor = null;
+        KindEditor.ready(function (key) {
+            editor = key.create('#list',{
+                //是否允许浏览服务器已上传文件,默认是false
+                resizeType : 1,
+                allowPreviewEmoticons : false,
+                uploadJson : '/scenic/editor_upload"',
+                allowImageUpload : true,
+                allowImageRemote: false,
+                afterUpload: function(data) {
+                    console.log(data)
+                    if (data.error = 0) {
+                        var url = data.url;
+                        if (formatUploadUrl) {
+                            url = key.formatUrl(url, 'absolute');
+
+                        }
+                        urlBox.val(url);
+                        if (self.afterUpload) {
+                            self.afterUpload.call(self, url, data, name);
+                        }
+
+                    } else {
+
+                    }
+
+
+                    },
+                pasteType : 0,      //设置能否粘贴
+                items : [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link','fullscreen'],
+                afterBlur: function () { this.sync(); }
+            })
+        })
+
         layui.config({
             base:'step/step-lay/'
         }).use([ 'form', 'step','jquery','upload','element'], function () {
@@ -301,7 +349,7 @@
             form.on('submit(formStep)', function (data) {
 				let formData = data.field;
 				let name = formData.name,
-				list = formData.list,
+				list = document.getElementById("list").value,
 				text = formData.text,
                 scenicType = formData.scenicType;
 

@@ -3,10 +3,8 @@ package com.example.controller;
 
 
 import com.example.mapper.ScenicMapper;
-import com.example.model.Audio;
-import com.example.model.JsonResult;
-import com.example.model.Scenic;
-import com.example.model.TBuy;
+import com.example.model.*;
+import com.example.service.IImgService;
 import com.example.service.IScenicService;
 import com.example.util.FileNameUtil;
 import com.example.util.PicUploadUtil;
@@ -14,10 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +41,9 @@ public class ScenicController {
 
     @Autowired(required = false)
     private ScenicMapper scenicMapper;
+
+    @Autowired
+    private IImgService iImgService;
 
     @RequestMapping({"/getScenic"})
     public Scenic getScenic(int id) {
@@ -237,5 +235,46 @@ public class ScenicController {
             }
         }
         return jsonResult;
+    }
+    @RequestMapping({"/editor_upload"})
+    @ResponseBody
+    public Map editorUpload(@RequestParam("imgFile") MultipartFile[] files) {
+        JsonResult jsonResult = new JsonResult();
+        Map<String,String> map = new HashMap<>();
+        TImg img = new TImg();
+        System.out.print("\n");
+        for (MultipartFile file : files) {
+            if (file.isEmpty()) {
+
+                map.put("error","1");
+                map.put("message","错误信息");
+            }
+            String fileName = ((String)Objects.<String>requireNonNull(file.getOriginalFilename())).replace(" ", "");
+            fileName = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date()) + "_" + fileName;
+            fileName = FileNameUtil.getFileName(fileName);
+
+            String realpath = "C:/scenic/picture/";
+            String path = realpath + fileName;
+            System.out.print("保存文件绝对路径" + path + "\n");
+            File dest = new File(path);
+            if (dest.exists()) {
+                map.put("message","错误信息");
+
+            }
+            if (!dest.getParentFile().exists()) {
+                dest.getParentFile().mkdir();
+                map.put("message","错误信息");
+            }
+            try {
+                file.transferTo(dest);
+                System.out.print("保存文件路径" + path + "\n");
+                String url = "http://119.23.61.114:80/picture/" + fileName;
+                img.setImgPath(url);
+                return iImgService.CallBack(img);
+            } catch (IOException e) {
+                map.put("message","错误信息");
+            }
+        }
+        return map;
     }
 }
