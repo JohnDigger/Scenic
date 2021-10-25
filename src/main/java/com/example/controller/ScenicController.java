@@ -266,6 +266,7 @@ public class ScenicController {
                 map.put("message","错误信息");
             }
             try {
+
                 file.transferTo(dest);
                 System.out.print("保存文件路径" + path + "\n");
                 String url = "http://119.23.61.114:80/picture/" + fileName;
