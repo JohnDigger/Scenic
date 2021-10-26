@@ -6,6 +6,8 @@ server:
       charset: utf-8
       enabled: true
   ssl:
+#    key-store: classpath:6452020_www.jiajialx.ink.jks
+#    key-password: Bj5UG7sY
     key-store: classpath:6452020_www.jiajialx.ink.pfx
     key-store-password: bod73L9k
     key-store-type: PKCS12
