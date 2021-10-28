@@ -1,21 +1,23 @@
 server:
-  port: 8080
+  port: 80
   servlet:
     context-path: /
     encoding:
       charset: utf-8
       enabled: true
-  tomcat:
-    connection-timeout: 200000
+  ssl:
+    key-store: classpath:6452020_www.jiajialx.ink.pfx
+    key-store-password: bod73L9k
+    key-store-type: PKCS12
+    enabled: true
+
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/scenic_spot?useUnicode=true&characterEncodeing=UTF-8&useSSL=false&serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/scenic_spot?useUnicode=true&characterEncodeing=UTF-8&useSSL=YES&serverTimezone=GMT
     username: root
-#    password: dtt000923
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncodeing=UTF-8&useSSL=false&serverTimezone=GMT
-    password: 123456
+    password: dtt000923
   servlet:
     multipart:
       max-request-size: 100MB
