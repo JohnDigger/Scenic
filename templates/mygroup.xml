@@ -1,0 +1,6 @@
+<templateSet group="mygroup">
+  <template name="cc" value="&#10;* $param$&#10;* $return$" description="类注释" toReformat="false" toShortenFQNames="true">
+    <variable name="param" expression="" defaultValue="groovyScript(&quot;def result='\\n'; def params=\&quot;${_1}\&quot;.replaceAll('[\\\\[|\\\\]|\\\\s]', '').split(',').toList(); for(i = 0; i &lt; params.size(); i++) {if(i == 0 &amp;&amp; params[i] == ''){return '';};result+=' * @param ' + params[i] + ((i &lt; params.size() - 1) ? '\\n' : ' ')}; return result&quot;, methodParameters())" alwaysStopAt="true" />
+    <variable name="return" expression="" defaultValue="groovyScript(&quot;def params=\&quot;${_1}\&quot;; if(params=='void'){return '';} else {return '\\n\t * @return ' + params}&quot;, methodReturnType())" alwaysStopAt="true" />
+  </template>
+</templateSet>
