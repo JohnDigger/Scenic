@@ -1,45 +1,69 @@
 <application>
-    <component name="libraryTable">
-        <library name="Python 3.7 (env) interpreter library">
-            <CLASSES>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/DLLs"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37"/>
-                <root url="file://D:/javaweb/mybatis/env"/>
-                <root url="file://D:/javaweb/mybatis/env/Lib/site-packages"/>
-                <root url="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32/lib"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pythonwin"/>
-                <root url="file://$USER_HOME$/AppData/Local/JetBrains/IntelliJIdea2020.1/python_stubs/584837403"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/python-skeletons"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3.7"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/2and3"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/3"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/2and3"/>
-            </CLASSES>
-            <JAVADOC/>
-            <SOURCES>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/DLLs"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37"/>
-                <root url="file://D:/javaweb/mybatis/env"/>
-                <root url="file://D:/javaweb/mybatis/env/Lib/site-packages"/>
-                <root url="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32/lib"/>
-                <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pythonwin"/>
-                <root url="file://$USER_HOME$/AppData/Local/JetBrains/IntelliJIdea2020.1/python_stubs/584837403"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/python-skeletons"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3.7"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/2and3"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/3"/>
-                <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/2and3"/>
-            </SOURCES>
-        </library>
-    </component>
+  <component name="libraryTable">
+    <library name="Python 3.7 (env) interpreter library">
+      <CLASSES>
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/DLLs" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37" />
+        <root url="file://D:/javaweb/mybatis/env" />
+        <root url="file://D:/javaweb/mybatis/env/Lib/site-packages" />
+        <root url="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32/lib" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pythonwin" />
+        <root url="file://$USER_HOME$/AppData/Local/JetBrains/IntelliJIdea2020.1/python_stubs/584837403" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/python-skeletons" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3.7" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/2and3" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/3" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/2and3" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/DLLs" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37" />
+        <root url="file://D:/javaweb/mybatis/env" />
+        <root url="file://D:/javaweb/mybatis/env/Lib/site-packages" />
+        <root url="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32/lib" />
+        <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pythonwin" />
+        <root url="file://$USER_HOME$/AppData/Local/JetBrains/IntelliJIdea2020.1/python_stubs/584837403" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/python-skeletons" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3.7" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/3" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/stdlib/2and3" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/3" />
+        <root url="file://$APPLICATION_PLUGINS_DIR$/python/helpers/typeshed/third_party/2and3" />
+      </SOURCES>
+    </library>
+    <library name="video-js" type="javaScript">
+      <properties>
+        <sourceFilesUrls>
+          <item url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_vjs.zencdn.net_7.6.6_video-js.css" />
+        </sourceFilesUrls>
+      </properties>
+      <CLASSES>
+        <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_vjs.zencdn.net_7.6.6_video-js.css" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="videojs-ie8" type="javaScript">
+      <properties>
+        <sourceFilesUrls>
+          <item url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_vjs.zencdn.net_ie8_1.1.2_videojs-ie8.js" />
+        </sourceFilesUrls>
+      </properties>
+      <CLASSES>
+        <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_vjs.zencdn.net_ie8_1.1.2_videojs-ie8.js" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
 </application>
