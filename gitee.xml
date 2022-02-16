@@ -3,5 +3,8 @@
     <account id="6d6ee17b-239a-409d-9be7-8ddbc8319b6b" name="541554971@qq.com ">
       <Server host="gitee.com" clientid="fc439d90cb2ffc20cffeb70a6a4039e69847485e0fa56cfa0d1bf006098e24dd" clientsecret="386f187646ee361049f69cd213424bdba5af03e820d10a68a68e5fb520902596" />
     </account>
+    <account id="1cc4e6e9-6c58-45da-94cd-07b54f7d9f6b" name="541554971@qq.com">
+      <Server useHttp="false" host="gitee.com" clientid="fc439d90cb2ffc20cffeb70a6a4039e69847485e0fa56cfa0d1bf006098e24dd" clientsecret="386f187646ee361049f69cd213424bdba5af03e820d10a68a68e5fb520902596" />
+    </account>
   </component>
 </application>
