@@ -2,7 +2,8 @@
   <component name="UmlConfiguration">
     <option name="categories">
       <map>
-        <entry id="JAVA" categories="Fields;Constructors;Methods;Properties;Inner Classes" />
+        <entry id="JAVA" categories="Fields;Constructors;Methods;Properties;Inner Classes;Show Cyclic" />
+        <entry id="MODULES" categories="Libraries;Test dependencies;Show Paths: Root -&gt; Selection;Show Neighbours of Selected Nodes;Borderless View" />
       </map>
     </option>
   </component>
