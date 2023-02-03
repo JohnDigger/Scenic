@@ -1,6 +1,6 @@
 <application>
-    <component name="OneDarkConfig">
-        <option name="userId" value="473ed30d-95f3-4e41-887e-8eadb7845d24"/>
-        <option name="version" value="5.1.5"/>
-    </component>
+  <component name="OneDarkConfig">
+    <option name="userId" value="473ed30d-95f3-4e41-887e-8eadb7845d24" />
+    <option name="version" value="5.3.1" />
+  </component>
 </application>
