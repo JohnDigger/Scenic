@@ -1,5 +1,17 @@
 <application>
   <component name="libraryTable">
+    <library name="DPlayer" type="javaScript">
+      <properties>
+        <sourceFilesUrls>
+          <item url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_dns.lmwa.cn_npm_dplayer_1.26.0_DPlayer.min.js" />
+        </sourceFilesUrls>
+      </properties>
+      <CLASSES>
+        <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_dns.lmwa.cn_npm_dplayer_1.26.0_DPlayer.min.js" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="Python 3.7 (env) interpreter library">
       <CLASSES>
         <root url="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/DLLs" />
