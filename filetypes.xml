@@ -8,6 +8,7 @@
       <mapping ext="keystore" type="PLAIN_TEXT" />
       <mapping ext="jks" type="PLAIN_TEXT" />
       <mapping ext="ashx" type="PLAIN_TEXT" />
+      <mapping ext="pfx" type="PLAIN_TEXT" />
       <mapping pattern="UserAccountTimeMapper" type="XML" />
       <mapping pattern="ProductMapper" type="XML" />
       <mapping pattern="AccountMapper" type="XML" />
