@@ -6,5 +6,6 @@
     <entry key="compiler.automake.allow.when.app.running" value="true" />
     <entry key="compiler.automake.trigger.delay" value="100" />
     <entry key="compiler.document.save.trigger.delay" value="100" />
+    <entry key="ide.balloon.shadow.size" value="0" />
   </component>
 </application>
